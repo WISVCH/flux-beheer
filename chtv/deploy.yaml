@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chtv
+  namespace: w3cie
+  labels:
+    k8s-app: chtv
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      k8s-app: chtv
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        k8s-app: chtv
+      name: chtv
+    spec:
+      containers:
+      - image: quay.io/wisvch/chtv:1
+        imagePullPolicy: IfNotPresent
+        name: chtv
+        resources:
+          limits:
+            cpu: 500m
+            memory: 200Mi
+          requests:
+            cpu: 10m
+            memory: 200Mi
+        securityContext:
+          privileged: false
+          runAsNonRoot: false
