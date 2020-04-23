@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: connect
+  namespace: default
+  labels:
+    app: connect
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: connect
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: connect
+    spec:
+      containers:
+      - env:
+        - name: JAVA_OPTS
+          value: -Xms400m -Xmx400m -XX:+ExitOnOutOfMemoryError -Djava.security.egd=file:/dev/./urandom
+            -Dspring.config.location=/connect/application.properties -Dspring.profiles.active=production
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.hostIP
+        - name: DD_TRACE_SPAN_TAGS
+          value: env:production
+        - name: DD_SERVICE_MAPPING
+          value: postgresql:connect-postgresql
+        image: quay.io/wisvch/connect:213
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: connect
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            memory: 900Mi
+          requests:
+            cpu: 250m
+            memory: 900Mi
+        volumeMounts:
+        - mountPath: /connect
+          name: connect
+          readOnly: true
+        - mountPath: /tls
+          name: tls
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: tls
+        secret:
+          defaultMode: 420
+          secretName: ingress-tls
+      - name: connect
+        secret:
+          defaultMode: 420
+          secretName: connect

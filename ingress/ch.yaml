@@ -46,24 +46,6 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: connect
-  namespace: default
-spec:
-  rules:
-    - host: connect.ch.tudelft.nl
-      http:
-        paths:
-          - backend:
-              serviceName: connect
-              servicePort: 80
-  tls:
-    - hosts:
-        - connect.ch.tudelft.nl
-      secretName: ingress-ext-tls
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
   annotations:
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: 32M
