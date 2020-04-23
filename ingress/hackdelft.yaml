@@ -65,17 +65,7 @@ metadata:
   name: ingress-ext-tls
   namespace: hackdelft
 spec:
-  acme:
-    config:
-    - domains:
-      - hackdelft.nl
-      - hackdelft.com
-      - www.hackdelft.com
-      - www.hackdelft.nl
-      - 2019.hackdelft.nl
-      - 2018.hackdelft.nl
-      - 2017.hackdelft.nl
-      http01: {}
+  secretName: ingress-ext-tls
   dnsNames:
   - hackdelft.nl
   - hackdelft.com
@@ -87,4 +77,3 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt-prod
-  secretName: ingress-ext-tls

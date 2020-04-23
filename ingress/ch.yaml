@@ -295,34 +295,7 @@ metadata:
   name: ingress-ext-tls
   namespace: default
 spec:
-  acme:
-    config:
-      - domains:
-          - ch.tudelft.nl
-          - www.ch.tudelft.nl
-          - 2012.nwerc.eu
-          - 2013.nwerc.eu
-          - 2016.bapc.eu
-          - alumni.ch.tudelft.nl
-          - businesstour.ch.tudelft.nl
-          - ch.ewi.tudelft.nl
-          - ch.its.tudelft.nl
-          - coh.ewi.tudelft.nl
-          - commissies.ch.tudelft.nl
-          - connect.ch.tudelft.nl
-          - dkp.tudelft.nl
-          - eerstejaarsweekend.nl
-          - files.ch.tudelft.nl
-          - hendrik.ch.tudelft.nl
-          - icpc.tudelft.nl
-          - lists.ch.tudelft.nl
-          - lustrum.ch
-          - rob.ch.tudelft.nl
-          - symposium.ch.tudelft.nl
-          - www.eerstejaarsweekend.nl
-          - www.icpc.tudelft.nl
-          - www.lustrum.ch
-        http01: {}
+  secretName: ingress-ext-tls
   dnsNames:
     - ch.tudelft.nl
     - www.ch.tudelft.nl
@@ -351,4 +324,3 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt-prod
-  secretName: ingress-ext-tls
