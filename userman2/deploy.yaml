@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: userman2
-        image: quay.io/wisvch/userman2:38c2dbf994a89e67226b8110fc37160263c4b10b
+        image: quay.io/wisvch/userman2:sha-6bc45f1
         imagePullPolicy: Always
         args:
         - gunicorn
