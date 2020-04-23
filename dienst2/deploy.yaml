@@ -106,7 +106,7 @@ spec:
         env:
         - name: ES_JAVA_OPTS
           value: -Xms128M -Xmx128M
-        image: elasticsearch:2
+        image: elasticsearch:2.4.6
         imagePullPolicy: Always
         name: elasticsearch
         resources:
