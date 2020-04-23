@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -104,7 +105,7 @@ spec:
         env:
         - name: ES_JAVA_OPTS
           value: -Xms128M -Xmx128M
-        image: elasticsearch:2
+        image: elasticsearch:7.6.2
         imagePullPolicy: Always
         name: elasticsearch
         resources:
