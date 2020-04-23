@@ -3,7 +3,7 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/whitelist-source-range: "131.180.20.132,131.180.20.133,131.180.20.134,131.180.20.135,131.180.20.136,131.180.20.137,131.180.20.138,131.180.20.139,131.180.20.140,131.180.20.141,131.180.20.142,131.180.20.144,131.180.20.145,10.54.0.0/16"
   name: dienst2-userman2
   namespace: default
