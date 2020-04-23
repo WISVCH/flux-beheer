@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userman2
+  namespace: default
+  labels:
+    app: userman2
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: userman2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      name: userman2
+      labels:
+        app: userman2
+    spec:
+      containers:
+        - name: userman2
+          image: quay.io/wisvch/userman2:38c2dbf994a89e67226b8110fc37160263c4b10b
+          imagePullPolicy: Always
+          args:
+            - gunicorn
+            - --workers=4
+          env:
+            - name: DATADOG_TRACE_AGENT_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.hostIP
+            - name: DATADOG_ENV
+              value: production
+          resources:
+            requests:
+              cpu: 10m
+              memory: 200Mi
+          volumeMounts:
+            - mountPath: /config
+              name: userman2-config
+              readOnly: true
+        - name: oidc-proxy
+          image: quay.io/wisvch/oidc-proxy:dev-1553867950
+          imagePullPolicy: IfNotPresent
+          args:
+            - --config
+            - /config/config.yml
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 30
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 10m
+              memory: 50Mi
+          volumeMounts:
+            - mountPath: /config
+              name: oidc-proxy-config
+              readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext:
+        runAsUser: 999
+      imagePullSecrets:
+        - name: github-packages
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: oidc-proxy-config
+          secret:
+            defaultMode: 420
+            secretName: userman2-oidc-proxy-config
+        - name: userman2-config
+          secret:
+            defaultMode: 420
+            secretName: userman2-config
