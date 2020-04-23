@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oidc-kubeconfig
+  namespace: default
+  labels:
+    app: oidc-kubeconfig
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: oidc-kubeconfig
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      name: oidc-kubeconfig
+      labels:
+        app: oidc-kubeconfig
+    spec:
+      containers:
+      - name: oidc-kubeconfig
+        image: quay.io/wisvch/oidc-kubeconfig:42
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - secretRef:
+            name: oidc-kubeconfig
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /healthz
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 32Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi

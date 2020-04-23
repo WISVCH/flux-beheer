@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: oidc-kubeconfig
+  name: oidc-kubeconfig
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: oidc-kubeconfig
+  sessionAffinity: None
+  type: ClusterIP
