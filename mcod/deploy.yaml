@@ -47,8 +47,6 @@ spec:
         - mountPath: /tmp
           name: tmpfs
       restartPolicy: Always
-      securityContext:
-        runAsNonRoot: false
       volumes:
       - emptyDir:
           medium: Memory
