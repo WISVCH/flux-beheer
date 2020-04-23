@@ -1,0 +1,1 @@
+{"jobID":"06a98c07-95a7-3ae8-897d-dbd1eda69b79","spec":{"type":"policy","cause":{"Message":"","User":"Mark Janssen \u003cmark@praseodym.net\u003e"},"spec":{"default:deployment/userman2":{"add":{"automated":"true"},"remove":{}}}},"result":null}
