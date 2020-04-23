@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/server-snippet: |
+      ssl_client_certificate /certs/quay.crt;
+      ssl_verify_client optional;
+      ssl_verify_depth 1;
+
+      error_log /var/log/nginx/error.log debug;
+
+      if ($scheme = https) {
+        set $test A;
+      }
+      if ($ssl_client_s_dn = "CN=*.quay.io,OU=EssentialSSL Wildcard,OU=Domain Control Validated") {
+        set $test B;
+      }
+      if ($test = A) {
+        return 403;
+      }
+  name: keel-ext
+  namespace: kube-system
+spec:
+  rules:
+    - host: keel.wisv.ch
+      http:
+        paths:
+        - backend:
+            serviceName: keel-keel
+            servicePort: 9300
+  tls:
+    - hosts:
+        - keel.wisv.ch
+      secretName: keel-ext-tls

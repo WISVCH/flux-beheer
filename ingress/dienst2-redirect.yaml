@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/permanent-redirect: https://dienst2.ch.tudelft.nl
+  name: dienst2-redirect
+  namespace: default
+spec:
+  rules:
+  - host: dienst2.chnet
+  tls:
+  - hosts:
+    - dienst2.chnet
+    secretName: dienst2-tls

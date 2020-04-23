@@ -1,0 +1,90 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/temporal-redirect: https://2019.hackdelft.nl
+  name: hackdelft-redirect
+  namespace: hackdelft
+spec:
+  rules:
+    - host: hackdelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: hackdelft-2019
+              servicePort: http
+    - host: hackdelft.com
+      http:
+        paths:
+          - backend:
+              serviceName: hackdelft-2019
+              servicePort: http
+  tls:
+    - hosts:
+        - hackdelft.nl
+        - hackdelft.com
+        - www.hackdelft.com
+        - www.hackdelft.nl
+      secretName: ingress-ext-tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: hackdelft
+  namespace: hackdelft
+spec:
+  rules:
+    - host: 2019.hackdelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: hackdelft-2019
+              servicePort: http
+    - host: 2018.hackdelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: hackdelft-2018
+              servicePort: http
+    - host: 2017.hackdelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: hackdelft-2017
+              servicePort: http
+  tls:
+    - hosts:
+        - 2019.hackdelft.nl
+        - 2018.hackdelft.nl
+        - 2017.hackdelft.nl
+      secretName: ingress-ext-tls
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: ingress-ext-tls
+  namespace: hackdelft
+spec:
+  acme:
+    config:
+    - domains:
+      - hackdelft.nl
+      - hackdelft.com
+      - www.hackdelft.com
+      - www.hackdelft.nl
+      - 2019.hackdelft.nl
+      - 2018.hackdelft.nl
+      - 2017.hackdelft.nl
+      http01: {}
+  dnsNames:
+  - hackdelft.nl
+  - hackdelft.com
+  - www.hackdelft.com
+  - www.hackdelft.nl
+  - 2019.hackdelft.nl
+  - 2018.hackdelft.nl
+  - 2017.hackdelft.nl
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  secretName: ingress-ext-tls

@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+  name: mand-ext
+  namespace: w3cie
+spec:
+  rules:
+    - host: wisv.ch
+      http:
+        paths:
+        - backend:
+            serviceName: mand
+            servicePort: 80
+  tls:
+    - hosts:
+        - wisv.ch
+        - www.wisv.ch
+      secretName: mand-ext-tls

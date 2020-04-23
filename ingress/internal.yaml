@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 32m
+    nginx.ingress.kubernetes.io/server-snippet: |
+      allow 10.54.0.0/16;
+      deny all;
+  name: internal
+  namespace: default
+spec:
+  rules:
+  - host: kubeconfig.k8s.chnet
+    http:
+      paths:
+      - backend:
+          serviceName: oidc-kubeconfig
+          servicePort: 80
+  - host: wiki.k8s.chnet
+    http:
+      paths:
+      - backend:
+          serviceName: dokuwiki
+          servicePort: 80
+  tls:
+  - hosts:
+    - kubeconfig.k8s.chnet
+    - wiki.k8s.chnet
+    secretName: ingress-tls

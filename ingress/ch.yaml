@@ -1,0 +1,354 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rob
+  namespace: default
+spec:
+  externalName: rob.chnet
+  type: ExternalName
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frans
+  namespace: default
+spec:
+  externalName: frans.chnet
+  type: ExternalName
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hendrik
+  namespace: default
+spec:
+  externalName: hendrik.chnet
+  type: ExternalName
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: website
+  namespace: default
+spec:
+  externalName: website.w3cie.svc.cluster.local
+  type: ExternalName
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: choice
+  namespace: default
+spec:
+  externalName: choice.w3cie.svc.cluster.local
+  type: ExternalName
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: connect
+  namespace: default
+spec:
+  rules:
+    - host: connect.ch.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: connect
+              servicePort: 80
+  tls:
+    - hosts:
+        - connect.ch.tudelft.nl
+      secretName: ingress-ext-tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 32M
+  name: ch
+  namespace: default
+spec:
+  rules:
+    - host: ch.tudelft.nl
+      http:
+        paths:
+          - path: /events
+            backend:
+              serviceName: events
+              servicePort: 80
+          - path: /payments
+            backend:
+              serviceName: payments
+              servicePort: 80
+          - path: /mail
+            backend:
+              serviceName: roundcube
+              servicePort: 80
+          - path: /feedback
+            backend:
+              serviceName: feedback-tool
+              servicePort: 80
+          - path: /password
+            backend:
+              serviceName: modify-password
+              servicePort: 80
+          - path: /other
+            backend:
+              serviceName: www-misc
+              servicePort: 80
+          - path: /certs
+            backend:
+              serviceName: www-misc
+              servicePort: 80
+          - path: /choice2
+            backend:
+              serviceName: choice
+              servicePort: 80
+          - path: /
+            backend:
+              serviceName: website
+              servicePort: 80
+  tls:
+    - hosts:
+        - ch.tudelft.nl
+        - www.ch.tudelft.nl
+      secretName: ingress-ext-tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/temporal-redirect: https://ch.tudelft.nl/wiki/chmanual:externetoegangank
+  name: files
+  namespace: default
+spec:
+  rules:
+    - host: files.ch.tudelft.nl
+  tls:
+    - hosts:
+        - files.ch.tudelft.nl
+      secretName: ingress-ext-tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/temporal-redirect: https://commissies.ch.tudelft.nl/icpc/
+  name: redirect-icpc
+  namespace: default
+spec:
+  rules:
+  - host: icpc.tudelft.nl
+  tls:
+  - hosts:
+    - icpc.tudelft.nl
+    secretName: ingress-ext-tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/temporal-redirect: https://ch.tudelft.nl
+  name: redirect-ch
+  namespace: default
+spec:
+  rules:
+  - host: ch.ewi.tudelft.nl
+  - host: ch.its.tudelft.nl
+  - host: hendrik.ch.tudelft.nl
+  - host: rob.ch.tudelft.nl
+  tls:
+  - hosts:
+    - ch.ewi.tudelft.nl
+    - ch.its.tudelft.nl
+    - hendrik.ch.tudelft.nl
+    - rob.ch.tudelft.nl
+    secretName: ingress-ext-tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/proxy-body-size: 32M
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location /category/uncategorized/ {
+        return 444;
+      }
+  name: proxy-misc
+  namespace: default
+spec:
+  rules:
+    - host: 2012.nwerc.eu
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
+    - host: 2013.nwerc.eu
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
+    - host: 2016.bapc.eu
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
+    - host: alumni.ch.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
+    - host: businesstour.ch.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
+    - host: ch.tudelft.nl
+      http:
+        paths:
+          - path: /wiki
+            backend:
+              serviceName: frans
+              servicePort: 443
+    - host: coh.ewi.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
+    - host: commissies.ch.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
+    - host: dkp.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
+    - host: eerstejaarsweekend.nl
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
+    - host: lists.ch.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: hendrik
+              servicePort: 443
+    - host: lustrum.ch
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
+    - host: symposium.ch.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
+  tls:
+    - hosts:
+        - ch.tudelft.nl
+        - 2012.nwerc.eu
+        - 2013.nwerc.eu
+        - 2016.bapc.eu
+        - alumni.ch.tudelft.nl
+        - businesstour.ch.tudelft.nl
+        - ch.ewi.tudelft.nl
+        - ch.its.tudelft.nl
+        - coh.ewi.tudelft.nl
+        - commissies.ch.tudelft.nl
+        - connect.ch.tudelft.nl
+        - dkp.tudelft.nl
+        - eerstejaarsweekend.nl
+        - files.ch.tudelft.nl
+        - hendrik.ch.tudelft.nl
+        - icpc.tudelft.nl
+        - lists.ch.tudelft.nl
+        - lustrum.ch
+        - rob.ch.tudelft.nl
+        - symposium.ch.tudelft.nl
+        - www.ch.tudelft.nl
+        - www.eerstejaarsweekend.nl
+        - www.icpc.tudelft.nl
+        - www.lustrum.ch
+      secretName: ingress-ext-tls
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: ingress-ext-tls
+  namespace: default
+spec:
+  acme:
+    config:
+      - domains:
+          - ch.tudelft.nl
+          - www.ch.tudelft.nl
+          - 2012.nwerc.eu
+          - 2013.nwerc.eu
+          - 2016.bapc.eu
+          - alumni.ch.tudelft.nl
+          - businesstour.ch.tudelft.nl
+          - ch.ewi.tudelft.nl
+          - ch.its.tudelft.nl
+          - coh.ewi.tudelft.nl
+          - commissies.ch.tudelft.nl
+          - connect.ch.tudelft.nl
+          - dkp.tudelft.nl
+          - eerstejaarsweekend.nl
+          - files.ch.tudelft.nl
+          - hendrik.ch.tudelft.nl
+          - icpc.tudelft.nl
+          - lists.ch.tudelft.nl
+          - lustrum.ch
+          - rob.ch.tudelft.nl
+          - symposium.ch.tudelft.nl
+          - www.eerstejaarsweekend.nl
+          - www.icpc.tudelft.nl
+          - www.lustrum.ch
+        http01: {}
+  dnsNames:
+    - ch.tudelft.nl
+    - www.ch.tudelft.nl
+    - 2012.nwerc.eu
+    - 2013.nwerc.eu
+    - 2016.bapc.eu
+    - alumni.ch.tudelft.nl
+    - businesstour.ch.tudelft.nl
+    - ch.ewi.tudelft.nl
+    - ch.its.tudelft.nl
+    - coh.ewi.tudelft.nl
+    - commissies.ch.tudelft.nl
+    - connect.ch.tudelft.nl
+    - dkp.tudelft.nl
+    - eerstejaarsweekend.nl
+    - files.ch.tudelft.nl
+    - hendrik.ch.tudelft.nl
+    - icpc.tudelft.nl
+    - lists.ch.tudelft.nl
+    - lustrum.ch
+    - rob.ch.tudelft.nl
+    - symposium.ch.tudelft.nl
+    - www.eerstejaarsweekend.nl
+    - www.icpc.tudelft.nl
+    - www.lustrum.ch
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  secretName: ingress-ext-tls

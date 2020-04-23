@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+  name: lancie
+  namespace: lancie
+spec:
+  rules:
+  - host: areafiftylan.nl
+    http:
+      paths:
+      - backend:
+          serviceName: lancie-frontend
+          servicePort: 80
+  - host: api.areafiftylan.nl
+    http:
+      paths:
+      - backend:
+          serviceName: lancie-api
+          servicePort: 80
+  - host: classified.areafiftylan.nl
+    http:
+      paths:
+      - backend:
+          serviceName: lancie-admin
+          servicePort: 80
+  tls:
+  - hosts:
+    - areafiftylan.nl
+    - www.areafiftylan.nl
+    - api.areafiftylan.nl
+    - classified.areafiftylan.nl
+    secretName: ingress-ext-tls
