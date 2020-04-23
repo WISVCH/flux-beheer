@@ -170,6 +170,9 @@ spec:
           successThreshold: 1
           failureThreshold: 3
 
+        securityContext:
+          privileged: true
+
       volumes:
       - hostPath:
           path: /var/run
