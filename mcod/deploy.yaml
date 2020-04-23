@@ -43,6 +43,9 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
           runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmpfs
       restartPolicy: Always
       securityContext:
         runAsNonRoot: false
