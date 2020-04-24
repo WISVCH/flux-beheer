@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: choice
+  namespace: w3cie
+  labels:
+    app: choice
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: choice
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: choice
+      labels:
+        app: choice
+    spec:
+      containers:
+      - name: choice
+        env:
+        - name: SERVER_CONTEXT_PATH
+          value: /choice2/
+        - name: SERVER_PORT
+          value: "8080"
+        - name: JAVA_OPTS
+          value: -Xms512m -Xmx512m -javaagent:/opt/datadog/dd-java-agent.jar
+        - name: SPRING_PROFILES_ACTIVE
+          value: production
+        - name: SPRING_HTTP_MULTIPART_MAX_FILE_SIZE
+          value: 64MB
+        - name: SPRING_HTTP_MULTIPART_MAX_REQUEST_SIZE
+          value: 64MB
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:postgresql://joost.chnet/choice?ssl=true
+        - name: SPRING_DATASOURCE_USERNAME
+          value: choice
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: choice
+              key: datasource-password
+        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+          value: validate
+        - name: WISVCH_CONNECT_ADMIN_GROUPS
+          value: chbeheer,dienst2
+        - name: WISVCH_CONNECT_ISSUER_URI
+          value: https://connect.ch.tudelft.nl
+        - name: WISVCH_CONNECT_CLIENT_URI
+          value: https://ch.tudelft.nl/choice2
+        - name: WISVCH_CONNECT_REGISTERED_CLIENT_CLIENT_ID
+          value: choice-dashboard
+        - name: WISVCH_CONNECT_REGISTERED_CLIENT_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: choice
+              key: connect-client-secret
+        - name: DD_SERVICE_NAME
+          value: choice
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.hostIP
+        - name: DD_TRACE_SPAN_TAGS
+          value: env:production
+        - name: DD_SERVICE_MAPPING
+          value: postgresql:choice-postgresql
+        image: wisvch/choice:220
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /choice2/api/v1/course
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /choice2/api/v1/course
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 40
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1000Mi
+          requests:
+            cpu: 200m
+            memory: 1000Mi

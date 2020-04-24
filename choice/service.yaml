@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: choice
+  namespace: w3cie
+  labels:
+    app: choice
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: http
+    name: http
+  selector:
+    app: choice
+  sessionAffinity: None
+  type: ClusterIP
