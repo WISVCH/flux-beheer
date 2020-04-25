@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -75,7 +76,7 @@ spec:
           value: env:production
         - name: DD_SERVICE_MAPPING
           value: postgresql:choice-postgresql
-        image: quay.io/wisvch/choice:sha-0b17f44
+        image: quay.io/wisvch/choice:sha-7d4cc84
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
