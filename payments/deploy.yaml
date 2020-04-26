@@ -1,0 +1,121 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments
+  namespace: default
+  labels:
+    app: payments
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: payments
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      name: payments
+      labels:
+        app: payments
+    spec:
+      containers:
+      - name: payments
+        image: wisvch/payments:348
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: SERVER_PORT
+          value: "8080"
+        - name: SERVER_CONTEXT_PATH
+          value: /payments
+        - name: JAVA_OPTS
+          value: -Xms128m -Xmx128m -javaagent:/opt/datadog/dd-java-agent.jar
+        - name: SPRING_PROFILES_ACTIVE
+          value: prod
+        - name: SPRING_MAIL_HOST
+          value: ch.tudelft.nl
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:postgresql://joost.chnet/payments?ssl=true
+        - name: SPRING_DATASOURCE_USERNAME
+          value: payments
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: payments
+              key: datasource-password
+        - name: PAYMENTS_WEBHOOKURL
+          value: https://ch.tudelft.nl/payments/api/orders/status
+        - name: PAYMENTS_RETURNURL
+          value: https://ch.tudelft.nl/
+        - name: PAYMENTS_MOLLIEKEY
+          valueFrom:
+            secretKeyRef:
+              name: payments
+              key: mollie-key
+        - name: PAYMENTS_MAIL_SENDER
+          value: payments@ch.tudelft.nl
+        - name: CONNECT_ADMIN_GROUPS
+          value: chbeheer,bestuur,hoothub
+        - name: CONNECT_ISSUER_URI
+          value: https://connect.ch.tudelft.nl
+        - name: CONNECT_CLIENT_URI
+          value: https://ch.tudelft.nl/payments
+        - name: EVENTS_USERNAME
+          value: CH events
+        - name: EVENTS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: payments
+              key: events-password
+        - name: CONNECT_REGISTERED_CLIENT_CLIENT_NAME
+          value: CH Payments production
+        - name: CONNECT_REGISTERED_CLIENT_CLIENT_ID
+          value: payments
+        - name: CONNECT_REGISTERED_CLIENT_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: payments
+              key: connect-secret
+        - name: DD_SERVICE_NAME
+          value: payments
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.hostIP
+        - name: DD_TRACE_SPAN_TAGS
+          value: env:production
+        - name: DD_SERVICE_MAPPING
+          value: postgresql:payments-postgresql
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        livenessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /payments/management/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /payments/management/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            memory: 1000Mi
+          requests:
+            cpu: 50m
+            memory: 800Mi
