@@ -42,7 +42,7 @@ spec:
         - name: SPRING_HTTP_MULTIPART_MAX_REQUEST_SIZE
           value: 64MB
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:postgresql://joost.chnet/choice?ssl=true
+          value: jdbc:postgresql://joost.chnet/choice?ssl=true&sslrootcert=/usr/local/share/ca-certificates/wisvch.crt
         - name: SPRING_DATASOURCE_USERNAME
           value: choice
         - name: SPRING_DATASOURCE_PASSWORD
