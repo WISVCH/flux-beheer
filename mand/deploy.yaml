@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,7 +27,7 @@ spec:
     spec:
       containers:
       - name: mand
-        image: quay.io/wisvch/mand:135
+        image: quay.io/wisvch/mand:136
         imagePullPolicy: IfNotPresent
         env:
         - name: DBCONNECTIONSTRING
