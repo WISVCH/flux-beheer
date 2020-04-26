@@ -85,7 +85,7 @@ spec:
         livenessProbe:
           failureThreshold: 10
           httpGet:
-            path: /choice2/api/v1/course
+            path: /choice2/health
             port: http
             scheme: HTTP
           initialDelaySeconds: 60
@@ -95,7 +95,7 @@ spec:
         readinessProbe:
           failureThreshold: 10
           httpGet:
-            path: /choice2/api/v1/course
+            path: /choice2/health
             port: http
             scheme: HTTP
           initialDelaySeconds: 40
