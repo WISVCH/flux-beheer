@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,7 +24,7 @@ spec:
     spec:
       containers:
       - name: flitcie-gallery3
-        image: quay.io/wisvch/flitcie-gallery3:57
+        image: quay.io/wisvch/flitcie-gallery3:58
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
