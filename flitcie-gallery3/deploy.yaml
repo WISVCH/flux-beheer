@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flitcie-gallery3
+  namespace: w3cie
+  labels:
+    app: flitcie-gallery3
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: flitcie-gallery3
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      name: flitcie-gallery3
+      labels:
+        app: flitcie-gallery3
+    spec:
+      containers:
+      - name: flitcie-gallery3
+        image: quay.io/wisvch/flitcie-gallery3:57
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        readinessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 512Mi
+        volumeMounts:
+        - mountPath: /data
+          name: data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: flitcie-gallery3
