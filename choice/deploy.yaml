@@ -29,18 +29,10 @@ spec:
       containers:
       - name: choice
         env:
-        - name: SERVER_SERVLET_CONTEXT_PATH
-          value: /choice2/
-        - name: SERVER_PORT
-          value: "8080"
         - name: JAVA_OPTS
           value: -Xms512m -Xmx512m -javaagent:/opt/datadog/dd-java-agent.jar
         - name: SPRING_PROFILES_ACTIVE
           value: production
-        - name: SPRING_HTTP_MULTIPART_MAX_FILE_SIZE
-          value: 64MB
-        - name: SPRING_HTTP_MULTIPART_MAX_REQUEST_SIZE
-          value: 64MB
         - name: SPRING_DATASOURCE_URL
           value: jdbc:postgresql://joost.chnet/choice?ssl=true&sslrootcert=/usr/local/share/ca-certificates/wisvch.crt
         - name: SPRING_DATASOURCE_USERNAME
@@ -50,12 +42,8 @@ spec:
             secretKeyRef:
               name: choice
               key: datasource-password
-        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
-          value: validate
         - name: WISVCH_CONNECT_ADMIN_GROUPS
           value: chbeheer,dienst2
-        - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
-          value: https://connect.ch.tudelft.nl
         - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENT_URI
           value: https://ch.tudelft.nl/choice2
         - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_ID
