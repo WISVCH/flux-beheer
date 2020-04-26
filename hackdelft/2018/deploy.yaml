@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hackdelft-2018
+  namespace: hackdelft
+  labels:
+    app: hackdelft-2018
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: hackdelft-2018
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: hackdelft-2018
+      labels:
+        app: hackdelft-2018
+    spec:
+      containers:
+      - name: hackdelft-2018
+        image: quay.io/wisvch/hackdelft-2018:38
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 2
+        readinessProbe:
+          failureThreshold: 1
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 2
+        resources:
+          limits:
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi
+        securityContext:
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts:
+        - name: tmpfs
+          mountPath: /tmp
+      volumes:
+      - name: tmpfs
+        emptyDir:
+          medium: Memory

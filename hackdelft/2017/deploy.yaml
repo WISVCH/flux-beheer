@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hackdelft-2017
+  namespace: hackdelft
+  labels:
+    app: hackdelft-2017
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: hackdelft-2017
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      name: hackdelft-2017
+      labels:
+        app: hackdelft-2017
+    spec:
+      containers:
+      - image: quay.io/wisvch/hackdelft-2017:30
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 2
+        name: hackdelft-2017
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 1
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 2
+        resources:
+          limits:
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
