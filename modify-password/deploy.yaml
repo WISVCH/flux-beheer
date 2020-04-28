@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -33,7 +34,7 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: status.hostIP
-        image: quay.io/wisvch/modify-password:22
+        image: quay.io/wisvch/modify-password:23
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
