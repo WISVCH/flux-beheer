@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,7 +24,7 @@ spec:
     spec:
       containers:
       - name: payments
-        image: wisvch/payments:348
+        image: wisvch/payments:349
         imagePullPolicy: IfNotPresent
         env:
         - name: SERVER_PORT
