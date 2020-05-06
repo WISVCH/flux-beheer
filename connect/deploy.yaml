@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -38,7 +39,7 @@ spec:
           value: env:production
         - name: DD_SERVICE_MAPPING
           value: postgresql:connect-postgresql
-        image: quay.io/wisvch/connect:213
+        image: quay.io/wisvch/connect:214
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3

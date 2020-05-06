@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,7 +27,7 @@ spec:
     spec:
       containers:
       - name: symposium-2020
-        image: quay.io/wisvch/symposium-2020:sha-ee0ada4
+        image: quay.io/wisvch/symposium-2020:sha-d7654d3
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
