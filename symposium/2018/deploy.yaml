@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,7 +27,7 @@ spec:
     spec:
       containers:
       - name: symposium-2018
-        image: wisvch/sympo-2018:65
+        image: wisvch/sympo-2018:66
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
