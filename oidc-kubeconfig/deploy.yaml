@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,7 +28,7 @@ spec:
     spec:
       containers:
       - name: oidc-kubeconfig
-        image: quay.io/wisvch/oidc-kubeconfig:42
+        image: quay.io/wisvch/oidc-kubeconfig:43
         imagePullPolicy: IfNotPresent
         envFrom:
         - secretRef:
