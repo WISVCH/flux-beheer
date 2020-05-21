@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,7 +27,7 @@ spec:
     spec:
       containers:
       - name: hackdelft-2018
-        image: quay.io/wisvch/hackdelft-2018:38
+        image: quay.io/wisvch/hackdelft-2018:39
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
