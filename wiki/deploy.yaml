@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: wiki
-        image: requarks/wiki:2
+        image: requarks/wiki:2.3.81
         imagePullPolicy: IfNotPresent
         env:
           - name: DB_TYPE
