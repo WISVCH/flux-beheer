@@ -8,6 +8,7 @@ metadata:
     app: wiki
   annotations:
     fluxcd.io/automated: 'true'
+    fluxcd.io/
 spec:
   replicas: 1
   revisionHistoryLimit: 3
@@ -27,23 +28,23 @@ spec:
         image: requarks/wiki:2.3.81
         imagePullPolicy: IfNotPresent
         env:
-          - name: DB_TYPE
-            value: "postgres"
-          - name: DB_HOST
-            value: "joost.chnet"
-          - name: DB_PORT
-            value: "5432"
-          - name: DB_USER
-            value: "wiki"
-          - name: DB_PASS
-            valueFrom:
-            secretKeyRef:
-              name: wiki
-              key: datasource-password
-          - name: DB_NAME
-            value: "wiki"
-          - name: DB_SSL
-            value: 1
+        - name: DB_TYPE
+          value: "postgres"
+        - name: DB_HOST
+          value: "joost.chnet"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          value: "wiki"
+        - name: DB_PASS
+          valueFrom:
+          secretKeyRef:
+            name: wiki
+            key: datasource-password
+        - name: DB_NAME
+          value: "wiki"
+        - name: DB_SSL
+          value: 1
         ports:
         - name: http
           containerPort: 3000
