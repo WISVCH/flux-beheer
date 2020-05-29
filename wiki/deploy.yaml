@@ -25,8 +25,8 @@ spec:
     spec:
       containers:
       - name: wiki
-        image: requarks/wiki:2.3.81
-        imagePullPolicy: IfNotPresent
+        image: requarks/wiki:2.3
+        imagePullPolicy: Always
         env:
         - name: DB_TYPE
           value: "postgres"
