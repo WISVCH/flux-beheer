@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wiki
+  namespace: default
+  labels:
+    app: wiki
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: wiki
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      name: wiki
+      labels:
+        app: wiki
+    spec:
+      containers:
+      - name: wiki
+        image: requarks/wiki:2
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: DB_TYPE
+            value: "postgres"
+          - name: DB_HOST
+            value: "joost.chnet"
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_USER
+            value: "wiki"
+          - name: DB_PASS
+            valueFrom:
+            secretKeyRef:
+              name: wiki
+              key: datasource-password
+          - name: DB_NAME
+            value: "wiki"
+          - name: DB_SSL
+            value: 1
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1000Mi
+          requests:
+            cpu: 50m
+            memory: 100Mi
