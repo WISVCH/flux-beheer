@@ -56,5 +56,5 @@ spec:
             cpu: 50m
             memory: 100Mi
       securityContext:
+        runAsNonRoot: true
         runAsUser: 1000
-        runAsGroup: 1000
