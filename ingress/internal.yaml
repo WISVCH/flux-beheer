@@ -20,7 +20,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: dokuwiki
+          serviceName: wiki
           servicePort: 80
   tls:
   - hosts:
