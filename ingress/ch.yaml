@@ -56,43 +56,43 @@ spec:
     - host: ch.tudelft.nl
       http:
         paths:
-          - path: /events
+          - path: /events/
             backend:
               serviceName: events
               servicePort: 80
-          - path: /payments
+          - path: /payments/
             backend:
               serviceName: payments
               servicePort: 80
-          - path: /mail
+          - path: /mail/
             backend:
               serviceName: roundcube
               servicePort: 80
-          - path: /feedback
+          - path: /feedback/
             backend:
               serviceName: feedback-tool
               servicePort: 80
-          - path: /password
+          - path: /password/
             backend:
               serviceName: modify-password
               servicePort: 80
-          - path: /other
+          - path: /other/
             backend:
               serviceName: www-misc
               servicePort: 80
-          - path: /certs
+          - path: /certs/
             backend:
               serviceName: www-misc
               servicePort: 80
-          - path: /choice2
+          - path: /choice2/
             backend:
               serviceName: choice
               servicePort: 80
-          - path: /wiki-v2
+          - path: /wiki-v2/
             backend:
               serviceName: wiki
               servicePort: 80
-          - path: /homedir
+          - path: /homedir/
             backend:
               serviceName: homedirs
               servicePort: 80
