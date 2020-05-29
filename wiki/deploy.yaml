@@ -43,7 +43,7 @@ spec:
         - name: DB_NAME
           value: "wiki"
         - name: DB_SSL
-          value: "1"
+          value: 1
         ports:
         - name: http
           containerPort: 3000
@@ -55,3 +55,5 @@ spec:
           requests:
             cpu: 50m
             memory: 100Mi
+        securityContext:
+          runAsNonRoot: false
