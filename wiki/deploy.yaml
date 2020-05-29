@@ -37,9 +37,9 @@ spec:
           value: "wiki"
         - name: DB_PASS
           valueFrom:
-          secretKeyRef:
-            name: wiki
-            key: datasource-password
+            secretKeyRef:
+              name: wiki
+              key: datasource-password
         - name: DB_NAME
           value: "wiki"
         - name: DB_SSL
