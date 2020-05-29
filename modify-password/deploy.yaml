@@ -34,7 +34,7 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: status.hostIP
-        image: quay.io/wisvch/modify-password:23
+        image: quay.io/wisvch/modify-password:sha-57ce050
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
