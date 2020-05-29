@@ -42,8 +42,6 @@ spec:
               key: datasource-password
         - name: DB_NAME
           value: "wiki"
-        - name: DB_SSL
-          value: "1"
         ports:
         - name: http
           containerPort: 3000
