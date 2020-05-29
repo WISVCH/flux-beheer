@@ -48,7 +48,7 @@ spec:
         - name: http
           containerPort: 3000
           protocol: TCP
-          resources:
+        resources:
           limits:
             cpu: 500m
             memory: 1000Mi
