@@ -8,7 +8,6 @@ metadata:
     app: wiki
   annotations:
     fluxcd.io/automated: 'true'
-    fluxcd.io/
 spec:
   replicas: 1
   revisionHistoryLimit: 3
