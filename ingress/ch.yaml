@@ -92,6 +92,10 @@ spec:
             backend:
               serviceName: wiki
               servicePort: 80
+          - path: /homedirs
+            backend:
+              serviceName: homedirs
+              servicePort: 80
           - path: /
             backend:
               serviceName: website
