@@ -88,10 +88,6 @@ spec:
             backend:
               serviceName: choice
               servicePort: 80
-          - path: /wiki-v2/
-            backend:
-              serviceName: wiki
-              servicePort: 80
           - path: /homedir/
             backend:
               serviceName: homedirs
