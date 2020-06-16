@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: homedirs
-        image: quay.io/wisvch/homedirs:sha-25f2293
+        image: quay.io/wisvch/homedirs:sha-84441ff
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
