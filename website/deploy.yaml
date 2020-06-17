@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: website
-        image: quay.io/wisvch/website:30
+        image: quay.io/wisvch/website:31
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
