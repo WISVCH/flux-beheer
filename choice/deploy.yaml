@@ -64,7 +64,7 @@ spec:
           value: env:production
         - name: DD_SERVICE_MAPPING
           value: postgresql:choice-postgresql
-        image: quay.io/wisvch/choice:sha-13bc906
+        image: quay.io/wisvch/choice:sha-27c0e9b
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
