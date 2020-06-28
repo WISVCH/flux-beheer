@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lancie-frontend
+  namespace: lancie
+  labels:
+    app: lancie-frontend
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: lancie-frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      name: lancie
+      labels:
+        app: lancie-frontend
+    spec:
+      containers:
+      - name: lancie-frontend
+        image: quay.io/areafiftylan/lancie-frontend:2789
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: "500m"
+            memory: 64Mi
+

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lancie-admin
+  namespace: lancie
+  labels:
+    app: lancie-admin
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: lancie-admin
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      name: lancie-admin
+      labels:
+        app: lancie-admin
+    spec:
+      containers:
+      - image: quay.io/areafiftylan/lancie-admin:606
+        imagePullPolicy: IfNotPresent
+        name: lancie-admin
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: "500m"
+            memory: 64Mi
