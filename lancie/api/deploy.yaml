@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,7 +24,7 @@ spec:
     spec:
       containers:
       - name: lancie-api
-        image: quay.io/areafiftylan/lancie-api:2218
+        image: quay.io/areafiftylan/lancie-api:2223
         imagePullPolicy: IfNotPresent
         env:
         - name: JAVA_OPTS

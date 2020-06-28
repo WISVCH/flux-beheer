@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,7 +27,7 @@ spec:
     spec:
       containers:
       - name: lancie-frontend-beta
-        image: quay.io/areafiftylan/lancie-frontend-beta:2790
+        image: quay.io/areafiftylan/lancie-frontend-beta:2800
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
