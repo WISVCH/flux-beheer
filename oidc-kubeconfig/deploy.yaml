@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: oidc-kubeconfig
-        image: quay.io/wisvch/oidc-kubeconfig:44
+        image: quay.io/wisvch/oidc-kubeconfig:45
         imagePullPolicy: IfNotPresent
         envFrom:
         - secretRef:
