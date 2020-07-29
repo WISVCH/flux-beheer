@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: www-misc
-        image: quay.io/wisvch/www-misc:17
+        image: quay.io/wisvch/www-misc:18
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
