@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bapc-2020
+  namespace: default
+  labels:
+    app: bapc-2020
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      k8s-app: chtv
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: bapc-2020
+      name: bapc-2020
+    spec:
+      containers:
+      - image: quay.io/wisvch/bapc-2020
+        imagePullPolicy: IfNotPresent
+        name: bapc-2020
+        resources:
+          limits:
+            cpu: 500m
+            memory: 200Mi
+          requests:
+            cpu: 10m
+            memory: 200Mi
+        securityContext:
+          privileged: false
+          runAsNonRoot: false
