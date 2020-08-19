@@ -37,6 +37,9 @@ metadata:
 data:
   datadog-collector-host: datadog-agent.monitoring.svc.cluster.local
   enable-opentracing: "true"
+  hsts: "true"
+  hsts-include-subdomains: "true"
+  hsts-max-age: "63072000"
   hsts-preload: "true"
   server-tokens: "false"
   ssl-protocols: TLSv1.3 TLSv1.2
