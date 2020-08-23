@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: flitcie-gallery3
-        image: quay.io/wisvch/flitcie-gallery3:75
+        image: quay.io/wisvch/flitcie-gallery3:76
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
