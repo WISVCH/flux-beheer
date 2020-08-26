@@ -27,7 +27,8 @@ spec:
         - --git-user=ChristiaanHuygens
         - --git-email=ChristiaanHuygens@users.noreply.github.com
         - --listen-metrics=:3031
-        image: docker.io/fluxcd/flux:1.20.0
+        - --sync-garbage-collection-dry=true
+        image: docker.io/fluxcd/flux:1.20.2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
