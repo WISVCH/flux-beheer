@@ -9,33 +9,66 @@ metadata:
   annotations:
     fluxcd.io/automated: 'true'
 spec:
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      k8s-app: chtv
+      app: bapc-2020
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
     type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
+      name: bapc-2020
       labels:
         app: bapc-2020
-      name: bapc-2020
     spec:
       containers:
-      - image: quay.io/wisvch/bapc-2020
+      - name: bapc-2020
+        image: quay.io/wisvch/bapc-2020:sha-2369cd4
         imagePullPolicy: IfNotPresent
-        name: bapc-2020
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 2
+        readinessProbe:
+          failureThreshold: 1
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 2
         resources:
           limits:
-            cpu: 500m
-            memory: 200Mi
+            memory: 64Mi
           requests:
             cpu: 10m
-            memory: 200Mi
+            memory: 32Mi
         securityContext:
           privileged: false
-          runAsNonRoot: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmpfs
+      restartPolicy: Always
+      securityContext:
+        runAsNonRoot: false
+      volumes:
+      - emptyDir:
+          medium: Memory
+        name: tmpfs
