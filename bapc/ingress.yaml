@@ -36,5 +36,5 @@ spec:
               servicePort: 80
   tls:
     - hosts:
-        - bapc.eu
+        - 2020.bapc.eu
       secretName: ingress-ext-tls

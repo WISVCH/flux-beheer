@@ -192,7 +192,7 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: rob
+              serviceName: kubernetes
               servicePort: 443
     - host: alumni.ch.tudelft.nl
       http:
