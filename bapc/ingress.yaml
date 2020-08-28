@@ -16,19 +16,3 @@ spec:
     - hosts:
         - 2020.bapc.eu
       secretName: ingress-ext-tls
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-spec:
-  rules:
-    - host: bapc.eu
-      http:
-        paths:
-          - path: /$
-            backend:
-              serviceName: bapc.eu
-              servicePort: 80
-  tls:
-    - hosts:
-        - 2020.bapc.eu
-      secretName: ingress-ext-tls

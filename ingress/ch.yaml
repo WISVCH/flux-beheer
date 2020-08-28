@@ -188,12 +188,6 @@ spec:
           - backend:
               serviceName: rob
               servicePort: 443
-    - host: 2020.bapc.eu
-      http:
-        paths:
-          - backend:
-              serviceName: kubernetes
-              servicePort: 443
     - host: alumni.ch.tudelft.nl
       http:
         paths:
