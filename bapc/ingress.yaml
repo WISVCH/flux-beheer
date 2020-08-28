@@ -5,14 +5,14 @@ metadata:
   namespace: default
 spec:
   rules:
-    - host: 2020.bapc.eu
+    - host: commissies.ch.tudelft.nl
       http:
         paths:
         - backend:
             serviceName: bapc-2020
             servicePort: 80
-          path: /
+          path: /bapc-2020
   tls:
     - hosts:
-        - 2020.bapc.eu
+        - commissies.ch.tudelft.nl
       secretName: ingress-ext-tls
