@@ -88,10 +88,6 @@ spec:
             backend:
               serviceName: choice
               servicePort: 80
-          - path: /homedir/
-            backend:
-              serviceName: homedirs
-              servicePort: 80
           - path: /
             backend:
               serviceName: website
