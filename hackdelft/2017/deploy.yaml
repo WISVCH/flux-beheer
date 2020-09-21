@@ -26,7 +26,7 @@ spec:
         app: hackdelft-2017
     spec:
       containers:
-      - image: quay.io/wisvch/hackdelft-2017:34
+      - image: quay.io/wisvch/hackdelft-2017:35
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
