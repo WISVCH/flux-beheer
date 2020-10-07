@@ -138,6 +138,7 @@ metadata:
 spec:
   rules:
   - host: www.bapc.eu
+  - host: bapc.eu
   tls:
   - hosts:
     - www.bapc.eu
