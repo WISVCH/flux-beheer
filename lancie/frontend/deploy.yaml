@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: lancie-frontend
-        image: quay.io/areafiftylan/lancie-frontend:2831
+        image: quay.io/areafiftylan/lancie-frontend:2833
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
