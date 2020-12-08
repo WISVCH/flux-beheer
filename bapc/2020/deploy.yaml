@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: bapc-2020
-        image: quay.io/wisvch/bapc-2020:sha-8d89d0b
+        image: quay.io/wisvch/bapc-2020:sha-3af4017
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
