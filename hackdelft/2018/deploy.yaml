@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: hackdelft-2018
-        image: quay.io/wisvch/hackdelft-2018:59
+        image: quay.io/wisvch/hackdelft-2018:62
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
