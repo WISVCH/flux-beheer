@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: symposium-2020
-        image: quay.io/wisvch/symposium-2020:sha-cc18689
+        image: quay.io/wisvch/symposium-2020:sha-f5abd8a
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
