@@ -9,7 +9,7 @@ metadata:
   annotations:
     fluxcd.io/automated: 'true'
 spec:
-  replicas: 2
+  replicas: 0
   revisionHistoryLimit: 5
   selector:
     matchLabels:
