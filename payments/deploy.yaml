@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: payments
-        image: wisvch/payments:364
+        image: wisvch/payments:365
         imagePullPolicy: IfNotPresent
         env:
         - name: SERVER_PORT
