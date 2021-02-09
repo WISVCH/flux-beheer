@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,7 +27,7 @@ spec:
     spec:
       containers:
       - name: mcod
-        image: quay.io/wisvch/mcod:49
+        image: quay.io/wisvch/mcod:52
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
