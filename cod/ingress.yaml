@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+  name: cod
+  namespace: w3cie
+spec:
+  rules:
+  - host: mcod.ch.tudelft.nl
+    http:
+      paths:
+      - backend:
+          serviceName: cod
+          servicePort: 80
+  tls:
+  - hosts:
+    - cod.ch.tudelft.nl
+    secretName: cod-tls
