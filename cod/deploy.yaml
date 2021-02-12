@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cod
+  namespace: w3cie
+  labels:
+    k8s-app: cod
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      k8s-app: cod
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      name: cod
+      labels:
+        k8s-app: cod
+    spec:
+      containers:
+      - name: cod
+        image: quay.io/wisvch/cod:8
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi
+        securityContext:
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmpfs
+      restartPolicy: Always
+      volumes:
+      - emptyDir:
+          medium: Memory
+        name: tmpfs
