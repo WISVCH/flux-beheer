@@ -8,7 +8,7 @@ metadata:
   namespace: w3cie
 spec:
   rules:
-  - host: mcod.ch.tudelft.nl
+  - host: cod.ch.tudelft.nl
     http:
       paths:
       - backend:
