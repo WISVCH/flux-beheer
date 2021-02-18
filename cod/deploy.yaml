@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: cod
-        image: quay.io/wisvch/cod:12
+        image: quay.io/wisvch/cod:13
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
