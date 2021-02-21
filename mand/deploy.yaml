@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: mand
-        image: quay.io/wisvch/mand:185
+        image: quay.io/wisvch/mand:186
         imagePullPolicy: IfNotPresent
         env:
         - name: DBCONNECTIONSTRING
