@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: symposium-2018
-        image: wisvch/sympo-2018:75
+        image: wisvch/sympo-2018:76
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
