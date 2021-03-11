@@ -26,7 +26,7 @@ spec:
         app: lancie-admin
     spec:
       containers:
-      - image: quay.io/areafiftylan/lancie-admin:657
+      - image: quay.io/areafiftylan/lancie-admin:658
         imagePullPolicy: IfNotPresent
         name: lancie-admin
         ports:
