@@ -39,7 +39,7 @@ spec:
           value: env:production
         - name: DD_SERVICE_MAPPING
           value: postgresql:connect-postgresql
-        image: quay.io/wisvch/connect:sha-31b8a2c
+        image: quay.io/wisvch/connect:sha-b5d7c8a
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
