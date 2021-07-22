@@ -48,7 +48,7 @@ spec:
         - name: SPRING_PROFILES_ACTIVE
           value: production
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:postgresql://joost.chnet/member-registration?ssl=require
+          value: jdbc:postgresql://joost.chnet/member-registration?ssl=true&sslrootcert=/usr/local/share/ca-certificates/wisvch.crt
         - name: SPRING_DATASOURCE_USERNAME
           value: member-registration
         - name: SPRING_DATASOURCE_PASSWORD
