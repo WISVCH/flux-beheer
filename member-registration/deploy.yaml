@@ -98,7 +98,7 @@ spec:
         livenessProbe:
           failureThreshold: 10
           httpGet:
-            path: /member-registration/actuator/health
+            path: /register/actuator/health
             port: http
             scheme: HTTP
           initialDelaySeconds: 60
@@ -108,7 +108,7 @@ spec:
         readinessProbe:
           failureThreshold: 10
           httpGet:
-            path: /member-registration/actuator/health
+            path: /register/actuator/health
             port: http
             scheme: HTTP
           initialDelaySeconds: 40
