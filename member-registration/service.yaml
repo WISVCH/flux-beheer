@@ -9,7 +9,7 @@ spec:
   ports:
   - port: 80
     protocol: TCP
-    targetPort: http
+    targetPort: 9000
     name: http
   selector:
     app: member-registration
