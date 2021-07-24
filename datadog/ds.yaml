@@ -164,9 +164,9 @@ spec:
           httpGet:
             path: /health
             port: 5555
-          initialDelaySeconds: 15
-          periodSeconds: 15
-          timeoutSeconds: 5
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
           successThreshold: 1
           failureThreshold: 3
 
