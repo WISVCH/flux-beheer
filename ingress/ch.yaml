@@ -97,6 +97,10 @@ spec:
             backend:
               serviceName: choice
               servicePort: 80
+          - path: /register/
+            backend:
+              serviceName: member-registration
+              servicePort: 80
           - path: /
             backend:
               serviceName: website
