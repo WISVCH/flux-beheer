@@ -43,6 +43,15 @@ spec:
   externalName: choice.w3cie.svc.cluster.local
   type: ExternalName
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: member-registration
+  namespace: default
+spec:
+  externalName: member-registration.w3cie.svc.cluster.local
+  type: ExternalName
+---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -87,10 +96,6 @@ spec:
           - path: /choice2/
             backend:
               serviceName: choice
-              servicePort: 80
-          - path: /register/
-            backend:
-              serviceName: member-registration
               servicePort: 80
           - path: /
             backend:
