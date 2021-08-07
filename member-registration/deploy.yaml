@@ -71,7 +71,7 @@ spec:
               name: member-registration
               key: connect-client-secret
         - name: WISVCH_PAYMENTS_ISSUERURI
-          value: http://payments/payments
+          value: https://ch.tudelft.nl/payments
         - name: WISVCH_PAYMENTS_CLIENTURI
           value: https://ch.tudelft.nl/register
         - name: DIENST_URL
