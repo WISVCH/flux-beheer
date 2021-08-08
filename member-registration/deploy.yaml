@@ -92,7 +92,7 @@ spec:
           value: env:production
         - name: DD_SERVICE_MAPPING
           value: postgresql:member-registration-postgresql
-        image: quay.io/wisvch/member-registration:sha-50e63ed
+        image: quay.io/wisvch/member-registration:sha-95ee773
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9000
