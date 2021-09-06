@@ -5,7 +5,7 @@ metadata:
   name: chtv
   namespace: w3cie
   labels:
-    k8s-app: chtv
+    app: chtv
   annotations:
     fluxcd.io/automated: 'true'
 spec:
