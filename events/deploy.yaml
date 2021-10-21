@@ -36,7 +36,7 @@ spec:
           value: "true"
         - name: SERVER_PORT
           value: "8080"
-        - name: SERVER_CONTEXT_PATH
+        - name: SERVER_SERVLET_CONTEXT_PATH
           value: /events
         - name: SPRING_MAIL_HOST
           value: ch.tudelft.nl
@@ -59,6 +59,19 @@ spec:
               key: datasource-password
         - name: SPRING_JPA_HIBERNATE_DDL_AUTO
           value: validate
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
+          value: https://connect.ch.tudelft.nl
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENTURI
+          value: https://ch.tudelft.nl/events
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_ID
+          value: events
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: events
+              key: connect-client-secret
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
+          value: openid, profile, email, ldap
         - name: FLYWAY_ENABLE
           value: "true"
         - name: FLYWAY_SCHEMAS
@@ -67,15 +80,11 @@ spec:
           value: chbeheer,dienst2,epa
         - name: WISVCH_CONNECT_BETA_USERS
           value: svenp, florisv, daveys, davida, ruthk, gijsw, karimo, willemijnv,
-            svenh, jurriaant, yoshia
+            svenh, jurriaant, yoshia, joepj
         - name: WISVCH_EVENTS_IMAGE_PATH
           value: https://ch.tudelft.nl/events/api/v1/documents/
         - name: WISVCH_PAYMENTS_ISSUERURI
           value: http://payments/payments
-        - name: WISVCH_PAYMENTS_CLIENTURI
-          value: https://ch.tudelft.nl/events
-        - name: WISVCH_CONNECT_ISSUER_URI
-          value: https://connect.ch.tudelft.nl
         - name: WISVCH_CONNECT_CLIENT_URI
           value: https://ch.tudelft.nl/events
         - name: WISVCH_CONNECT_REGISTERED_CLIENT_CLIENT_NAME
