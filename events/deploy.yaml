@@ -80,7 +80,7 @@ spec:
           value: chbeheer,dienst2,epa
         - name: WISVCH_CONNECT_BETA_USERS
           value: svenp, florisv, daveys, davida, ruthk, gijsw, karimo, willemijnv,
-            svenh, jurriaant, yoshia, joepj
+            svenh, jurriaant, yoshia, joepj, juliand
         - name: WISVCH_EVENTS_IMAGE_PATH
           value: https://ch.tudelft.nl/events/api/v1/documents/
         - name: WISVCH_PAYMENTS_ISSUERURI
