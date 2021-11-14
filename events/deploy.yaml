@@ -74,7 +74,7 @@ spec:
           value: openid, profile, email, ldap
         - name: SPRING_FLYWAY_ENABLE
           value: "true"
-        - name: FLYWAY_SCHEMAS
+        - name: SPRING_FLYWAY_SCHEMAS
           value: event
         - name: WISVCH_CONNECT_ADMIN_GROUPS
           value: chbeheer,dienst2,epa
