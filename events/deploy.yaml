@@ -57,7 +57,7 @@ spec:
             secretKeyRef:
               name: events
               key: datasource-password
-        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+        - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
           value: validate
         - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
           value: https://connect.ch.tudelft.nl
