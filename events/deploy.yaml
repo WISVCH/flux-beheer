@@ -72,7 +72,7 @@ spec:
               key: connect-client-secret
         - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
           value: openid, profile, email, ldap
-        - name: FLYWAY_ENABLE
+        - name: SPRING_FLYWAY_ENABLE
           value: "true"
         - name: FLYWAY_SCHEMAS
           value: event
