@@ -49,7 +49,7 @@ spec:
         - name: JAVA_OPTS
           value: -Xms128m -Xmx128m -javaagent:/opt/datadog/dd-java-agent.jar
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:postgresql://joost.chnet/events?ssl=true
+          value: jdbc:postgresql://joost.chnet/events?ssl=true&sslrootcert=/usr/local/share/ca-certificates/wisvch.crt
         - name: SPRING_DATASOURCE_USERNAME
           value: events
         - name: SPRING_DATASOURCE_PASSWORD
