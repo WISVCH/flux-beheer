@@ -83,6 +83,8 @@ spec:
             svenh, jurriaant, yoshia, joepj, juliand
         - name: WISVCH_EVENTS_IMAGE_PATH
           value: https://ch.tudelft.nl/events/api/v1/documents/
+        - name: WISVCH_PAYMENTS_CLIENTURI
+          value: https://ch.tudelft.nl/events
         - name: WISVCH_PAYMENTS_ISSUERURI
           value: http://payments/payments
         - name: WISVCH_CONNECT_CLIENT_URI
