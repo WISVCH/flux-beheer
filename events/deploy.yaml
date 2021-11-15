@@ -36,7 +36,7 @@ spec:
           value: "true"
         - name: SERVER_PORT
           value: "8080"
-        - name: SERVER_CONTEXT_PATH
+        - name: SERVER_SERVLET_CONTEXT_PATH
           value: /events
         - name: SPRING_MAIL_HOST
           value: ch.tudelft.nl
@@ -57,25 +57,34 @@ spec:
             secretKeyRef:
               name: events
               key: datasource-password
-        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+        - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
           value: validate
-        - name: FLYWAY_ENABLE
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
+          value: https://connect.ch.tudelft.nl
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENTURI
+          value: https://ch.tudelft.nl/events
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_ID
+          value: events
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: events
+              key: connect-client-secret
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
+          value: openid, profile, email, ldap
+        - name: SPRING_FLYWAY_ENABLE
           value: "true"
-        - name: FLYWAY_SCHEMAS
+        - name: SPRING_FLYWAY_SCHEMAS
           value: event
         - name: WISVCH_CONNECT_ADMIN_GROUPS
           value: chbeheer,dienst2,epa
         - name: WISVCH_CONNECT_BETA_USERS
           value: svenp, florisv, daveys, davida, ruthk, gijsw, karimo, willemijnv,
-            svenh, jurriaant, yoshia
+            svenh, jurriaant, yoshia, joepj, juliand
         - name: WISVCH_EVENTS_IMAGE_PATH
           value: https://ch.tudelft.nl/events/api/v1/documents/
         - name: WISVCH_PAYMENTS_ISSUERURI
           value: http://payments/payments
-        - name: WISVCH_PAYMENTS_CLIENTURI
-          value: https://ch.tudelft.nl/events
-        - name: WISVCH_CONNECT_ISSUER_URI
-          value: https://connect.ch.tudelft.nl
         - name: WISVCH_CONNECT_CLIENT_URI
           value: https://ch.tudelft.nl/events
         - name: WISVCH_CONNECT_REGISTERED_CLIENT_CLIENT_NAME
@@ -98,7 +107,7 @@ spec:
           value: env:production
         - name: DD_SERVICE_MAPPING
           value: postgresql:events-postgresql
-        image: wisvch/events:1559
+        image: quay.io/wisvch/events:sha-40043ad
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
