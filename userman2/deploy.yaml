@@ -28,8 +28,8 @@ spec:
     spec:
       containers:
       - name: userman2
-        image: quay.io/wisvch/userman2:sha-9e1598d
-        imagePullPolicy: Always
+        image: ghcr.io/wisvch/userman2:20211115-7365e8d
+        imagePullPolicy: IfNotPresent
         args:
         - gunicorn
         - --workers=4
@@ -81,7 +81,7 @@ spec:
       securityContext:
         runAsUser: 999
       imagePullSecrets:
-      - name: github-packages
+      - name: ghcr.io
       terminationGracePeriodSeconds: 30
       volumes:
       - name: oidc-proxy-config
