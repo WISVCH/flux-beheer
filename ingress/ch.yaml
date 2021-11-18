@@ -286,7 +286,6 @@ spec:
         - businesstour.ch.tudelft.nl
         - ch.ewi.tudelft.nl
         - ch.its.tudelft.nl
-        - chtv.ch.tudelft.nl
         - coh.ewi.tudelft.nl
         - commissies.ch.tudelft.nl
         - connect.ch.tudelft.nl
@@ -325,7 +324,6 @@ spec:
     - businesstour.ch.tudelft.nl
     - ch.ewi.tudelft.nl
     - ch.its.tudelft.nl
-    - chtv.ch.tudelft.nl
     - coh.ewi.tudelft.nl
     - commissies.ch.tudelft.nl
     - connect.ch.tudelft.nl
