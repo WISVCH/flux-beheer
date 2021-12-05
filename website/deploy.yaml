@@ -53,8 +53,6 @@ spec:
           value: disable-comments,disable-search,post-types-order,wordpress-seo,https://github.com/daggerhart/openid-connect-generic/archive/dev.zip,https://github.com/WISVCH/wisvch-wordpress-plugin/archive/master.zip,depublish-posts,redirection,ewww-image-optimizer,photo-gallery,10web-manager,instagram-feed,wp-statistics
         - name: APACHE_LOG_DIR
           value: /var/log/apache/
-        - name: ServerName
-          value: https://ch.tudelft.nl
         resources:
           limits:
             cpu: "2"
