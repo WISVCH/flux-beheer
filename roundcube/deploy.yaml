@@ -40,6 +40,12 @@ spec:
           name: src
         - mountPath: /shared/temp
           name: temp
+        resources:
+          limits:
+            memory: 64Mi
+          requests:
+            cpu: 50m
+            memory: 32Mi
       - name: nginx
         image: nginx:stable
         imagePullPolicy: Always
@@ -55,6 +61,12 @@ spec:
         - mountPath: /var/www
           name: src
           readOnly: true
+        resources:
+          limits:
+            memory: 32Mi
+          requests:
+            cpu: 10m
+            memory: 4Mi
       securityContext:
         runAsUser: 0
       volumes:
