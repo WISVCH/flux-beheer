@@ -14,6 +14,7 @@ https://docs.datadoghq.com/agent/cluster_agent/setup/?tab=daemonset
 * use `datadog-secret` for API and app keys.
 * add `securityContext.runAsNonRoot: false` to cluster agent deployment
 * add `DD_CLUSTER_NAME=esxi-01`
+* follow https://docs.datadoghq.com/agent/cluster_agent/external_metrics/?tab=daemonset
 
 ## Agent
 
