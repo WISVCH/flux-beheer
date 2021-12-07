@@ -264,7 +264,9 @@ spec:
             - name: DD_DOGSTATSD_SOCKET
               value: "/var/run/datadog/dsd.socket"
             - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-              value: "false"
+              value: "true"
+            - name: DD_CLUSTER_NAME
+              value: "esxi-01"
             - name: DD_KUBELET_TLS_VERIFY
               value: "false"
             - name: DD_HOSTNAME
