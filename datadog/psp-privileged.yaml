@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: psp-privileged
+  namespace: monitoring
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: psp-privileged
+subjects:
+- kind: ServiceAccount
+  name: datadog-agent
+  namespace: monitoring
+- kind: ServiceAccount
+  name: datadog-cluster-agent
+  namespace: monitoring
+
