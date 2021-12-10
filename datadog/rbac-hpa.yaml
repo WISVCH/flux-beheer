@@ -9,7 +9,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: dca
-  namespace: default
+  namespace: monitoring
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -23,7 +23,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: dca
-  namespace: default
+  namespace: monitoring
 ---
 apiVersion: apiregistration.k8s.io/v1
 kind: APIService
@@ -36,7 +36,7 @@ spec:
   versionPriority: 100
   service:
     name: datadog-custom-metrics-server
-    namespace: default
+    namespace: monitoring
   version: v1beta1
 ---
 apiVersion: rbac.authorization.k8s.io/v1
