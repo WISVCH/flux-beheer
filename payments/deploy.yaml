@@ -24,12 +24,12 @@ spec:
     spec:
       containers:
       - name: payments
-        image: wisvch/payments:367
+        image: wisvch/payments:20211213-081a2ed 
         imagePullPolicy: IfNotPresent
         env:
         - name: SERVER_PORT
           value: "8080"
-        - name: SERVER_CONTEXT_PATH
+        - name: SERVER_SERVLET_CONTEXT_PATH
           value: /payments
         - name: JAVA_OPTS
           value: -Xms128m -Xmx128m -javaagent:/opt/datadog/dd-java-agent.jar
@@ -38,7 +38,7 @@ spec:
         - name: SPRING_MAIL_HOST
           value: ch.tudelft.nl
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:postgresql://joost.chnet/payments?ssl=true
+          value: jdbc:postgresql://joost.chnet/payments?ssl=true&sslrootcert=/usr/local/share/ca-certificates/wisvch.crt
         - name: SPRING_DATASOURCE_USERNAME
           value: payments
         - name: SPRING_DATASOURCE_PASSWORD
@@ -59,9 +59,9 @@ spec:
           value: payments@ch.tudelft.nl
         - name: CONNECT_ADMIN_GROUPS
           value: chbeheer,bestuur
-        - name: CONNECT_ISSUER_URI
+        - name: SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
           value: https://connect.ch.tudelft.nl
-        - name: CONNECT_CLIENT_URI
+        - name: SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENT_URI
           value: https://ch.tudelft.nl/payments
         - name: EVENTS_USERNAME
           value: CH events
@@ -72,13 +72,15 @@ spec:
               key: events-password
         - name: CONNECT_REGISTERED_CLIENT_CLIENT_NAME
           value: CH Payments production
-        - name: CONNECT_REGISTERED_CLIENT_CLIENT_ID
+        - name: SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_ID
           value: payments
-        - name: CONNECT_REGISTERED_CLIENT_CLIENT_SECRET
+        - name: SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               name: payments
               key: connect-secret
+        - name: SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
+          value: openid,profile,email,ldap
         - name: DD_SERVICE_NAME
           value: payments
         - name: DD_AGENT_HOST
