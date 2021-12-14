@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: payments
-        image: ghcr.io/wisvch/payments:20211213-8e65860
+        image: ghcr.io/wisvch/payments:20211214-37c0c4f
         imagePullPolicy: IfNotPresent
         env:
         - name: SERVER_PORT
