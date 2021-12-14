@@ -59,9 +59,9 @@ spec:
           value: payments@ch.tudelft.nl
         - name: CONNECT_ADMIN_GROUPS
           value: chbeheer,bestuur
-        - name: SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
           value: https://connect.ch.tudelft.nl
-        - name: SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENT_URI
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENT_URI
           value: https://ch.tudelft.nl/payments
         - name: EVENTS_USERNAME
           value: CH events
@@ -72,14 +72,14 @@ spec:
               key: events-password
         - name: CONNECT_REGISTERED_CLIENT_CLIENT_NAME
           value: CH Payments production
-        - name: SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_ID
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_ID
           value: payments
-        - name: SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_SECRET
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               name: payments
               key: connect-secret
-        - name: SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
           value: openid,profile,email,ldap
         - name: DD_SERVICE_NAME
           value: payments
