@@ -26,7 +26,7 @@ spec:
         app: lancie-admin
     spec:
       containers:
-      - image: ghcr.io/areafiftylan/lancie-admin:20211208-cddba4d
+      - image: ghcr.io/areafiftylan/lancie-admin:20211215-cddba4d
         imagePullPolicy: IfNotPresent
         name: lancie-admin
         ports:
