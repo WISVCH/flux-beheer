@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: lancie-api
-        image: quay.io/areafiftylan/lancie-api:70
+        image: quay.io/areafiftylan/lancie-api:73
         imagePullPolicy: IfNotPresent
         env:
         - name: JAVA_OPTS
