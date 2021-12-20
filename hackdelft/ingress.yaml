@@ -1,9 +1,7 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/temporal-redirect: https://2019.hackdelft.nl
-  name: hackdelft-redirect
+  name: hackdelft
   namespace: hackdelft
 spec:
   rules:
@@ -11,29 +9,20 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: hackdelft-2019
+              serviceName: hackdelft-2022
               servicePort: http
     - host: hackdelft.com
       http:
         paths:
           - backend:
-              serviceName: hackdelft-2019
+              serviceName: hackdelft-2022
               servicePort: http
-  tls:
-    - hosts:
-        - hackdelft.nl
-        - hackdelft.com
-        - www.hackdelft.com
-        - www.hackdelft.nl
-      secretName: ingress-ext-tls
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: hackdelft
-  namespace: hackdelft
-spec:
-  rules:
+    - host: 2022.hackdelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: hackdelft-2022
+              servicePort: http
     - host: 2019.hackdelft.nl
       http:
         paths:
@@ -54,6 +43,11 @@ spec:
               servicePort: http
   tls:
     - hosts:
+        - hackdelft.nl
+        - hackdelft.com
+        - www.hackdelft.com
+        - www.hackdelft.nl
+        - 2022.hackdelft.nl
         - 2019.hackdelft.nl
         - 2018.hackdelft.nl
         - 2017.hackdelft.nl
@@ -67,13 +61,14 @@ metadata:
 spec:
   secretName: ingress-ext-tls
   dnsNames:
-  - hackdelft.nl
-  - hackdelft.com
-  - www.hackdelft.com
-  - www.hackdelft.nl
-  - 2019.hackdelft.nl
-  - 2018.hackdelft.nl
-  - 2017.hackdelft.nl
+    - hackdelft.nl
+    - hackdelft.com
+    - www.hackdelft.com
+    - www.hackdelft.nl
+    - 2022.hackdelft.nl
+    - 2019.hackdelft.nl
+    - 2018.hackdelft.nl
+    - 2017.hackdelft.nl
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt-prod

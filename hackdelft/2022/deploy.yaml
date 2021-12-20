@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hackdelft-2022
+  namespace: hackdelft
+  labels:
+    app: hackdelft-2022
+  annotations:
+    fluxcd.io/automated: "true"
+spec:
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: hackdelft-2022
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      name: hackdelft-2022
+      labels:
+        app: hackdelft-2022
+    spec:
+      containers:
+        - name: hackdelft-2022
+          image: ghcr.io/wisvch/hackdelft-2022:20211218-4cbd527
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          resources:
+            limits:
+              memory: 64Mi
+            requests:
+              cpu: 10m
+              memory: 32Mi
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          volumeMounts:
+            - name: tmpfs
+              mountPath: /tmp
+      volumes:
+        - name: tmpfs
+          emptyDir:
+            medium: Memory
