@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,27 +26,27 @@ spec:
         app: hackdelft-2022
     spec:
       containers:
-        - name: hackdelft-2022
-          image: ghcr.io/wisvch/hackdelft-2022:20211218-4cbd527
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
-              name: http
-              protocol: TCP
-          resources:
-            limits:
-              memory: 64Mi
-            requests:
-              cpu: 10m
-              memory: 32Mi
-          securityContext:
-            privileged: false
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-          volumeMounts:
-            - name: tmpfs
-              mountPath: /tmp
-      volumes:
+      - name: hackdelft-2022
+        image: ghcr.io/wisvch/hackdelft-2022:20211223-19a18f0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi
+        securityContext:
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts:
         - name: tmpfs
-          emptyDir:
-            medium: Memory
+          mountPath: /tmp
+      volumes:
+      - name: tmpfs
+        emptyDir:
+          medium: Memory
