@@ -34,7 +34,7 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: status.hostIP
-        image: ghcr.io/wisvch/modify-password:20211202-69f2bd6
+        image: ghcr.io/wisvch/modify-password:20220102-69f2bd6
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
