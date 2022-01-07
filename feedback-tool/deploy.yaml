@@ -62,7 +62,7 @@ spec:
         envFrom:
         - secretRef:
             name: feedback-tool
-        image: quay.io/wisvch/feedback-tool:160
+        image: ghcr.io/wisvch/feedback-tool:20220107-940e262
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
