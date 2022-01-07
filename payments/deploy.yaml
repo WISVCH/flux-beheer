@@ -99,7 +99,7 @@ spec:
         livenessProbe:
           failureThreshold: 6
           httpGet:
-            path: /payments/management/health
+            path: /payments/actuator/health
             port: 8080
             scheme: HTTP
           initialDelaySeconds: 60
@@ -109,7 +109,7 @@ spec:
         readinessProbe:
           failureThreshold: 10
           httpGet:
-            path: /payments/management/health
+            path: /payments/actuator/health
             port: 8080
             scheme: HTTP
           initialDelaySeconds: 60
