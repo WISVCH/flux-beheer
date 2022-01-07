@@ -57,7 +57,7 @@ spec:
               key: mollie-key
         - name: PAYMENTS_MAIL_SENDER
           value: payments@ch.tudelft.nl
-        - name: CONNECT_ADMIN_GROUPS
+        - name: WISVCH_CONNECT_ADMIN_GROUPS
           value: chbeheer,bestuur
         - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
           value: https://connect.ch.tudelft.nl
