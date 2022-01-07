@@ -65,7 +65,7 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: status.hostIP
-        image: quay.io/wisvch/dienst2:20211216-6054e66
+        image: ghcr.io/wisvch/dienst2:20220107-5c6ea99
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
