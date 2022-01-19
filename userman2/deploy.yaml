@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: userman2
-        image: ghcr.io/wisvch/userman2:20220118-93d8b39
+        image: ghcr.io/wisvch/userman2:20220119-bffdad5
         imagePullPolicy: IfNotPresent
         args:
         - gunicorn
