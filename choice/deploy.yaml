@@ -64,7 +64,7 @@ spec:
           value: env:production
         - name: DD_SERVICE_MAPPING
           value: postgresql:choice-postgresql
-        image: ghcr.io/wisvch/choice:20220107-ce6bc24
+        image: ghcr.io/wisvch/choice:20220202-ce6bc24
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
