@@ -114,7 +114,7 @@ spec:
           value: env:production
         - name: DD_SERVICE_MAPPING
           value: postgresql:events-postgresql
-        image: quay.io/wisvch/events:20220223-1d104c0
+        image: quay.io/wisvch/events:20220223-095831d
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
