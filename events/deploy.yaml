@@ -90,8 +90,6 @@ spec:
             secretKeyRef:
               name: payments
               key: mollie-key
-        - name: WISVCH_PAYMENTS_ISSUERURI
-          value: http://payments/payments
         - name: WISVCH_CONNECT_CLIENT_URI
           value: https://ch.tudelft.nl/events
         - name: WISVCH_CONNECT_REGISTERED_CLIENT_CLIENT_NAME
