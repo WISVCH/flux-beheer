@@ -77,7 +77,7 @@ spec:
         - name: SPRING_FLYWAY_SCHEMAS
           value: event
         - name: TZ
-            value: Europe/Amsterdam
+          value: Europe/Amsterdam
         - name: WISVCH_CONNECT_ADMIN_GROUPS
           value: chbeheer,dienst2,epa
         - name: WISVCH_CONNECT_BETA_USERS
