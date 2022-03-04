@@ -92,7 +92,7 @@ spec:
           value: env:production
         - name: DD_SERVICE_MAPPING
           value: postgresql:member-registration-postgresql
-        image: ghcr.io/wisvch/member-registration:20220202-f02579d
+        image: ghcr.io/wisvch/member-registration:20220302-f02579d
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9000
