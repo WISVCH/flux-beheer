@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: hackdelft-2022
-        image: ghcr.io/wisvch/hackdelft-2022:20220310-078f77a
+        image: ghcr.io/wisvch/hackdelft-2022:20220310-8c4ddd0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
