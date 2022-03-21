@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: cod
-        image: ghcr.io/wisvch/cod:20220321-97cb79d
+        image: ghcr.io/wisvch/cod:20220321-2f9b035
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
