@@ -76,6 +76,8 @@ spec:
           value: "true"
         - name: SPRING_FLYWAY_SCHEMAS
           value: event
+        - name: SPRING_FLYWAY_TABLE
+          value: schema_version
         - name: TZ
           value: Europe/Amsterdam
         - name: WISVCH_CONNECT_ADMIN_GROUPS
