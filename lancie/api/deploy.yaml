@@ -35,6 +35,8 @@ spec:
           value: "8080"
         - name: SPRING_MAIL_HOST
           value: ch.tudelft.nl
+        - name: SPRING_MAIL_PORT
+          value: "25"
         - name: SPRING_DATASOURCE_URL
           value: jdbc:postgresql://joost.chnet:5432/areafiftylan?ssl=true&sslrootcert=/usr/local/share/ca-certificates/wisvch.crt
         - name: SPRING_DATASOURCE_USERNAME
