@@ -42,10 +42,10 @@ spec:
           name: temp
         resources:
           limits:
-            memory: 64Mi
+            memory: 128Mi
           requests:
             cpu: 50m
-            memory: 32Mi
+            memory: 64Mi
       - name: nginx
         image: nginx:stable
         imagePullPolicy: Always
@@ -63,10 +63,10 @@ spec:
           readOnly: true
         resources:
           limits:
-            memory: 32Mi
+            memory: 64Mi
           requests:
             cpu: 10m
-            memory: 4Mi
+            memory: 8Mi
       securityContext:
         runAsUser: 0
       volumes:
