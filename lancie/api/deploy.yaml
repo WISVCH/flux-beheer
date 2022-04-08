@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: lancie-api
-        image: ghcr.io/areafiftylan/lancie-api:20220308-94b743f
+        image: ghcr.io/areafiftylan/lancie-api:20220408-3ef75c1
         imagePullPolicy: IfNotPresent
         env:
         - name: JAVA_OPTS
