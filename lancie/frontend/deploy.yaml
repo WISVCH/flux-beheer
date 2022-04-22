@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: lancie-frontend
-        image: ghcr.io/areafiftylan/lancie-frontend:20220422-09ea2c2
+        image: ghcr.io/areafiftylan/lancie-frontend:20220422-15967ac
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
