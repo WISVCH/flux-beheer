@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nwerc
+  namespace: nwerc
+spec:
+  rules:
+    - host: nwerc.eu
+      http:
+        paths:
+          - backend:
+              serviceName: nwerc-2022
+              servicePort: http
+    - host: 2022.nwerc.eu
+      http:
+        paths:
+          - backend:
+              serviceName: nwerc-2022
+              servicePort: http
+  tls:
+    - hosts:
+        - nwerc.eu
+        - 2022.nwerc.eu
+      secretName: ingress-ext-tls
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: ingress-ext-tls
+  namespace: nwerc
+spec:
+  secretName: ingress-ext-tls
+  dnsNames:
+    - nwerc.eu
+    - 2022.nwerc.eu
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
