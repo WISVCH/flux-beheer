@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: bapc-2020
-        image: ghcr.io/wisvch/bapc-2020:20220402-b806c9c
+        image: ghcr.io/wisvch/bapc-2020:20220502-b806c9c
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
