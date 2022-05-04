@@ -21,7 +21,7 @@ spec:
     - hosts:
         - nwerc.eu
         - 2022.nwerc.eu
-      secretName: ingress-ext-tls
+      secretName: ingress-ext-tls-nwerc
 ---
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
