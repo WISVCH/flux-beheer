@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nwerc-2022
-  namespace: nwerc
+  namespace: default
   labels:
     app: nwerc-2022
   annotations:

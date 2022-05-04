@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: nwerc
-  namespace: nwerc
+  namespace: default
 spec:
   rules:
     - host: nwerc.eu
@@ -27,7 +27,7 @@ apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: ingress-ext-tls
-  namespace: nwerc
+  namespace: default
 spec:
   secretName: ingress-ext-tls
   dnsNames:
