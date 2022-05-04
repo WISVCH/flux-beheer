@@ -26,10 +26,10 @@ spec:
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: ingress-ext-tls
+  name: ingress-ext-tls-nwerc
   namespace: default
 spec:
-  secretName: ingress-ext-tls
+  secretName: ingress-ext-tls-nwerc
   dnsNames:
     - nwerc.eu
     - 2022.nwerc.eu
