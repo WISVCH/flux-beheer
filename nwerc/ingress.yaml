@@ -33,6 +33,7 @@ spec:
   dnsNames:
     - nwerc.eu
     - 2022.nwerc.eu
+    - www.nwerc.eu
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt-prod
