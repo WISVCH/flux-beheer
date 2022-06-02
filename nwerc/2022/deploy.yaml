@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: nwerc-2022
-        image: ghcr.io/wisvch/nwerc-2022:20220509-a91c73c
+        image: ghcr.io/wisvch/nwerc-2022:20220602-a91c73c
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
