@@ -1,16 +1,12 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
   name: nwerc
   namespace: default
 spec:
   rules:
-    - host: nwerc.eu
-      http:
-        paths:
-          - backend:
-              serviceName: nwerc-2022
-              servicePort: http
     - host: 2022.nwerc.eu
       http:
         paths:
@@ -19,9 +15,24 @@ spec:
               servicePort: http
   tls:
     - hosts:
-        - nwerc.eu
         - 2022.nwerc.eu
       secretName: ingress-ext-tls-nwerc
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/temporal-redirect: https://2022.nwerc.eu
+  name: redirect-nwerc
+  namespace: default
+spec:
+  rules:
+  - host: nwerc.eu
+  tls:
+  - hosts:
+    - nwerc.eu
+    secretName: ingress-ext-tls
 ---
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
@@ -32,8 +43,9 @@ spec:
   secretName: ingress-ext-tls-nwerc
   dnsNames:
     - nwerc.eu
-    - 2022.nwerc.eu
     - www.nwerc.eu
+    - 2022.nwerc.eu
+    - www.2022.nwerc.eu
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt-prod
