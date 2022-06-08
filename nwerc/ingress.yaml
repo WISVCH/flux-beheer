@@ -33,7 +33,7 @@ spec:
   - hosts:
     - nwerc.eu
     - www.nwerc.eu
-    secretName: ingress-ext-tls
+    secretName: ingress-ext-tls-nwerc
 ---
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
