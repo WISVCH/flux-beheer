@@ -20,6 +20,10 @@ spec:
             serviceName: symposium-2020
             servicePort: 80
           path: /2020/
+        - backend:
+            serviceName: symposium-2022
+            servicePort: 80
+          path: /2022/
   tls:
     - hosts:
         - symposium.ch.tudelft.nl
@@ -29,7 +33,7 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/temporal-redirect: https://symposium.ch.tudelft.nl/2020/
+    nginx.ingress.kubernetes.io/temporal-redirect: https://symposium.ch.tudelft.nl/2022/
     nginx.ingress.kubernetes.io/use-regex: "true"
   name: symposium-redirect
   namespace: default
@@ -40,7 +44,7 @@ spec:
         paths:
           - path: /$
             backend:
-              serviceName: symposium-2020
+              serviceName: symposium-2022
               servicePort: 80
   tls:
     - hosts:
