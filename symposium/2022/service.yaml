@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: symposium-2022
+  namespace: default
+  labels:
+    app: symposium-2022
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: symposium-2022
+  type: ClusterIP
