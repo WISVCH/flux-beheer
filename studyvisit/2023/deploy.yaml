@@ -1,0 +1,82 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studyvisit-2023
+  labels:
+    app: studyvisit-2023
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: studyvisit-2023
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: studyvisit-2023
+      labels:
+        app: studyvisit-2023
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: studyvisit-2023
+          image: wordpress:php7.2-apache
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            failureThreshold: 1
+            httpGet:
+              path: /
+              port: http
+              scheme: HTTP
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 2
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: joost.chnet
+            - name: WORDPRESS_DB_USER
+              value: studyvisit2022_wp
+            - name: WORDPRESS_DB_NAME
+              value: studyvisit2022_wp
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: studyvisit2022_db-password
+            - name: WORDPRESS_DB_PREFIX
+              value: studyvisit2022_
+            - name: APACHE_LOG_DIR
+              value: /var/log/apache/
+          securityContext:
+            runAsNonRoot: false
+          volumeMounts:
+            - mountPath: /var/www/html/wp-content
+              name: studyvisit-storage
+      volumes:
+        - name: studyvisit-storage
+          persistentVolumeClaim:
+            claimName: studyvisit-storage
