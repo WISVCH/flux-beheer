@@ -275,6 +275,12 @@ spec:
           - backend:
               serviceName: rob
               servicePort: 443
+    - host: studyvisit.ch.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
   tls:
     - hosts:
         - ch.tudelft.nl
@@ -298,6 +304,7 @@ spec:
         - lustrum.ch
         - rob.ch.tudelft.nl
         - symposium.ch.tudelft.nl
+        - studyvisit.ch.tudelft.nl
         - www.ch.tudelft.nl
         - www.eerstejaarsweekend.nl
         - www.icpc.tudelft.nl
@@ -336,6 +343,7 @@ spec:
     - lustrum.ch
     - rob.ch.tudelft.nl
     - symposium.ch.tudelft.nl
+    - studyvisit.ch.tudelft.nl
     - www.eerstejaarsweekend.nl
     - www.icpc.tudelft.nl
     - www.lustrum.ch
