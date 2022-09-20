@@ -2,17 +2,20 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: studyvisit
+  namespace: default
 spec:
   rules:
     - host: studyvisit.ch.tudelft.nl
       http:
         paths:
           - pathType: Prefix
-            path: "/2023"
+            path: /2023
             backend:
               serviceName: studyvisit-2023
               servicePort: 80
-          - backend:
+          - pathType: Prefix
+            path: /
+            backend:
               serviceName: studyvisit-2023
               servicePort: 80
   tls:
