@@ -66,7 +66,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: studyvisit2022_db-password
+                  name: studyvisit2022-db-password
             - name: WORDPRESS_DB_PREFIX
               value: studyvisit2022_
             - name: APACHE_LOG_DIR
