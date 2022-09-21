@@ -59,7 +59,7 @@ spec:
             - name: WORDPRESS_DB_HOST
               value: joost.chnet
             - name: WORDPRESS_DB_USER
-              value: studyvisit2022_wp
+              value: studyvisit
             - name: WORDPRESS_DB_NAME
               value: studyvisit2022_wp
             - name: WORDPRESS_DB_PASSWORD
