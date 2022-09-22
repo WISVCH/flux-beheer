@@ -21,16 +21,4 @@ spec:
   tls:
     - hosts:
         - studyvisit.ch.tudelft.nl
-      secretName: ingress-cert-studyvisit
----
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: ingress-cert-studyvisit
-spec:
-  secretName: ingress-ext-tls
-  dnsNames:
-    - studyvisit.ch.tudelft.nl
-  issuerRef:
-    kind: ClusterIssuer
-    name: letsencrypt-prod
+      secretName: ingress-ext-tls
