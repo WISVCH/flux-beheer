@@ -269,13 +269,7 @@ spec:
           - backend:
               serviceName: rob
               servicePort: 443
-    - host: symposium.ch.tudelft.nl
-      http:
-        paths:
-          - backend:
-              serviceName: rob
-              servicePort: 443
-  - host: studyvisit.ch.tudelft.nl
+    - host: symposium.ch.tudelft.nl # Legacy redirect for the 2010 site
       http:
         paths:
           - backend:
@@ -304,7 +298,6 @@ spec:
         - lustrum.ch
         - rob.ch.tudelft.nl
         - symposium.ch.tudelft.nl
-        - studyvisit.ch.tudelft.nl
         - www.ch.tudelft.nl
         - www.eerstejaarsweekend.nl
         - www.icpc.tudelft.nl
