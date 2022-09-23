@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: studyvisit
   namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 256m
 spec:
   rules:
     - host: studyvisit.ch.tudelft.nl
