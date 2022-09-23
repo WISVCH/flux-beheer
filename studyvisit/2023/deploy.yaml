@@ -74,9 +74,15 @@ spec:
           securityContext:
             runAsNonRoot: false
           volumeMounts:
-            - mountPath: /var/www/html/wp-content
-              name: studyvisit-storage
+            - name: studyvisit-storage
+              mountPath: /var/www/html/wp-content
+            - name: studyvisit-2023-cfg
+              mountPath: /usr/local/etc/php/conf.d/php.ini
+              subPath: php.ini
       volumes:
         - name: studyvisit-storage
           persistentVolumeClaim:
             claimName: studyvisit-storage
+        - name: studyvisit-2023-cfg
+          configMap:
+            name: studyvisit-2023-cfg

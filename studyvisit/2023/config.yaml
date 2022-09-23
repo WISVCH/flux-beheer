@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: studyvisit-2023-cfg
+  namespace: default
+data:
+  php.ini: |
+    upload_max_filesize=256M
+    post_max_size=256M
