@@ -24,7 +24,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: studyvisit-2023
-          image: wordpress:php7.2-apache
+          image: wordpress:6.0.2-apache
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
