@@ -10,17 +10,15 @@ spec:
     - host: coh.ewi.tudelft.nl
       http:
         paths:
-          - path: "/"
-            backend:
-              serviceName: coh
-              servicePort: 80
+          - backend:
+              serviceName: rob
+              servicePort: 443
     - host: alumni.ch.tudelft.nl
       http:
         paths:
-          - path: "/"
-            backend:
-              serviceName: coh
-              servicePort: 80
+          - backend:
+              serviceName: rob
+              servicePort: 443
   tls:
     - hosts:
         - alumni.ch.tudelft.nl
