@@ -1,0 +1,88 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coh
+  labels:
+    app: coh
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coh
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: coh
+      labels:
+        app: coh
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: coh
+          image: wordpress:6.0.2-apache
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            failureThreshold: 1
+            httpGet:
+              path: /
+              port: http
+              scheme: HTTP
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 2
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: joost.chnet
+            - name: WORDPRESS_DB_USER
+              value: cie_coh
+            - name: WORDPRESS_DB_NAME
+              value: cie_coh
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: cie_coh-db-password
+            - name: WORDPRESS_DB_PREFIX
+              value: wp_
+            - name: APACHE_LOG_DIR
+              value: /var/log/apache/
+          securityContext:
+            runAsNonRoot: false
+          volumeMounts:
+            - name: coh-storage
+              mountPath: /var/www/html/wp-content
+            - name: coh-cfg
+              mountPath: /usr/local/etc/php/conf.d/php.ini
+              subPath: php.ini
+      volumes:
+        - name: coh-storage
+          persistentVolumeClaim:
+            claimName: coh-storage
+        - name: coh-cfg
+          configMap:
+            name: coh-cfg

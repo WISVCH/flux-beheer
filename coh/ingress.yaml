@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: coh
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 256m
+spec:
+  rules:
+    - host: coh.ewi.tudelft.nl
+      http:
+        paths:
+          - path: "/"
+            backend:
+              serviceName: coh
+              servicePort: 80
+    - host: alumni.ch.tudelft.nl
+      http:
+        paths:
+          - path: "/"
+            backend:
+              serviceName: coh
+              servicePort: 80
+  tls:
+    - hosts:
+        - alumni.ch.tudelft.nl
+        - coh.ewi.tudelft.nl
+      secretName: ingress-ext-tls
