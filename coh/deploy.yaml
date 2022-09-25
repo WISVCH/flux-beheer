@@ -66,7 +66,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: cie_coh-db-password
+                  name: coh-db-password
             - name: WORDPRESS_DB_PREFIX
               value: wp_
             - name: APACHE_LOG_DIR
