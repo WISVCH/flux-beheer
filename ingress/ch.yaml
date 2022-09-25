@@ -214,6 +214,12 @@ spec:
           - backend:
               serviceName: rob
               servicePort: 443
+    - host: alumni.ch.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: rob
+              servicePort: 443
     - host: businesstour.ch.tudelft.nl
       http:
         paths:
@@ -226,6 +232,12 @@ spec:
           - path: /wiki
             backend:
               serviceName: frans
+              servicePort: 443
+    - host: coh.ewi.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: rob
               servicePort: 443
     - host: commissies.ch.tudelft.nl
       http:
@@ -270,10 +282,12 @@ spec:
         - 2013.nwerc.eu
         - 2016.bapc.eu
         - 2020.bapc.eu
+        - alumni.ch.tudelft.nl
         - businesstour.ch.tudelft.nl
         - ch.ewi.tudelft.nl
         - ch.its.tudelft.nl
         - commissies.ch.tudelft.nl
+        - coh.ewi.tudelft.nl
         - connect.ch.tudelft.nl
         - dkp.tudelft.nl
         - eerstejaarsweekend.nl
