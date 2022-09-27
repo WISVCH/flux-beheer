@@ -116,7 +116,7 @@ spec:
           value: env:production
         - name: DD_SERVICE_MAPPING
           value: postgresql:events-postgresql
-        image: ghcr.io/wisvch/events:20220927-93d97e5
+        image: ghcr.io/wisvch/events:20220927-c252897
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
