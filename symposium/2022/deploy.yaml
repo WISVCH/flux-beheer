@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: symposium-2022
-        image: ghcr.io/wisvch/symposium-2022:20220929-8167753
+        image: ghcr.io/wisvch/symposium-2022:20221002-8167753
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
