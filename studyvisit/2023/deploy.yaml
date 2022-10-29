@@ -79,8 +79,8 @@ spec:
             - name: studyvisit-2023-cfg
               mountPath: /usr/local/etc/php/conf.d/php.ini
               subPath: php.ini
-            - name: studyvisit-2023-cfg/xmlrpc.php
-              mountPath: /var/www/html
+            - name: studyvisit-2023-cfg
+              mountPath: /var/www/html/xmlrpc.php
               subPath: xmlrpc.php
       volumes:
         - name: studyvisit-storage
