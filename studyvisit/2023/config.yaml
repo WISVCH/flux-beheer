@@ -7,3 +7,7 @@ data:
   php.ini: |
     upload_max_filesize=256M
     post_max_size=256M
+  xmlrpc.php: |
+    <?php
+    echo "Access Denied";
+    exit;
