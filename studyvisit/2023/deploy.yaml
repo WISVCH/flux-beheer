@@ -80,8 +80,9 @@ spec:
               mountPath: /usr/local/etc/php/conf.d/php.ini
               subPath: php.ini
             - name: studyvisit-2023-cfg
-              mountPath: /var/www/html/xmlrpc.php
+              mountPath: /usr/src/wordpress/xmlrpc.php
               subPath: xmlrpc.php
+              readOnly: true
       volumes:
         - name: studyvisit-storage
           persistentVolumeClaim:
