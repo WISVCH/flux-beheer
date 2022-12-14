@@ -81,7 +81,7 @@ spec:
         - name: TZ
           value: Europe/Amsterdam
         - name: WISVCH_CONNECT_ADMIN_GROUPS
-          value: chbeheer,dienst2,epa
+          value: chbeheer,dienst2,epa,vc
         - name: WISVCH_CONNECT_BETA_USERS
           value: svenp, florisv, daveys, davida, ruthk, gijsw, karimo, willemijnv,
             svenh, jurriaant, yoshia, joepj, juliand
