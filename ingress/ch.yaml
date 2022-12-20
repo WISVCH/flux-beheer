@@ -65,10 +65,10 @@ spec:
     - host: ch.tudelft.nl
       http:
         paths:
-          - path: /events/
-            backend:
-              serviceName: events
-              servicePort: 80
+          # - path: /events/
+          #   backend:
+          #     serviceName: events
+          #     servicePort: 80
           - path: /payments/
             backend:
               serviceName: payments
@@ -135,11 +135,11 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: icpc.tudelft.nl
+    - host: icpc.tudelft.nl
   tls:
-  - hosts:
-    - icpc.tudelft.nl
-    secretName: ingress-ext-tls
+    - hosts:
+        - icpc.tudelft.nl
+      secretName: ingress-ext-tls
 # ---
 # apiVersion: networking.k8s.io/v1beta1
 # kind: Ingress
@@ -167,19 +167,19 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: ch.ewi.tudelft.nl
-  - host: ch.its.tudelft.nl
-  - host: hendrik.ch.tudelft.nl
-  - host: rob.ch.tudelft.nl
-  - host: bestuur.ch
+    - host: ch.ewi.tudelft.nl
+    - host: ch.its.tudelft.nl
+    - host: hendrik.ch.tudelft.nl
+    - host: rob.ch.tudelft.nl
+    - host: bestuur.ch
   tls:
-  - hosts:
-    - ch.ewi.tudelft.nl
-    - ch.its.tudelft.nl
-    - hendrik.ch.tudelft.nl
-    - rob.ch.tudelft.nl
-    - bestuur.ch
-    secretName: ingress-ext-tls
+    - hosts:
+        - ch.ewi.tudelft.nl
+        - ch.its.tudelft.nl
+        - hendrik.ch.tudelft.nl
+        - rob.ch.tudelft.nl
+        - bestuur.ch
+      secretName: ingress-ext-tls
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -318,8 +318,8 @@ spec:
     - 2013.nwerc.eu
     - 2016.bapc.eu
     - 2020.bapc.eu
-#    - www.bapc.eu
-#    - bapc.eu
+    #    - www.bapc.eu
+    #    - bapc.eu
     - alumni.ch.tudelft.nl
     - businesstour.ch.tudelft.nl
     - ch.ewi.tudelft.nl
