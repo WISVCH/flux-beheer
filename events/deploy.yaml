@@ -26,127 +26,126 @@ spec:
         app: events
     spec:
       containers:
-        - name: events
-          env:
-            - name: MANAGEMENT_CONTEXT_PATH
-              value: /management
-            - name: MANAGEMENT_ENDPOINTS_ENABLED
-              value: "false"
-            - name: MANAGEMENT_ENDPOINTS_HEALTH_ENABLED
-              value: "true"
-            - name: SERVER_PORT
-              value: "8080"
-            - name: SERVER_SERVLET_CONTEXT_PATH
-              value: /events
-            - name: SPRING_MAIL_HOST
-              value: ch.tudelft.nl
-            - name: SPRING_MAIL_PORT
-              value: "25"
-            - name: SPRING_PROFILES_ACTIVE
-              value: production
-            - name: SPRING_HTTP_MULTIPART_MAX_FILE_SIZE
-              value: 5mb
-            - name: JAVA_OPTS
-              value: -Xms128m -Xmx128m -javaagent:/opt/datadog/dd-java-agent.jar
-            - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://joost.chnet/events?ssl=true&sslrootcert=/usr/local/share/ca-certificates/wisvch.crt
-            - name: SPRING_DATASOURCE_USERNAME
-              value: events
-            - name: SPRING_DATASOURCE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: events
-                  key: datasource-password
-            - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
-              value: validate
-            - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
-              value: https://connect.ch.tudelft.nl
-            - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENTURI
-              value: https://ch.tudelft.nl/events
-            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_ID
-              value: events
-            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: events
-                  key: connect-client-secret
-            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
-              value: openid, profile, email, ldap
-            - name: SPRING_FLYWAY_ENABLE
-              value: "true"
-            - name: SPRING_FLYWAY_SCHEMAS
-              value: event
-            - name: SPRING_FLYWAY_TABLE
-              value: schema_version
-            - name: TZ
-              value: Europe/Amsterdam
-            - name: WISVCH_CONNECT_ADMIN_GROUPS
-              value: chbeheer,dienst2,epa
-            - name: WISVCH_CONNECT_BETA_USERS
-              value:
-                svenp, florisv, daveys, davida, ruthk, gijsw, karimo, willemijnv,
-                svenh, jurriaant, yoshia, joepj, juliand
-            - name: WISVCH_EVENTS_IMAGE_PATH
-              value: https://ch.tudelft.nl/events/api/v1/documents/
-            - name: MOLLIE_CLIENTURI
-              value: https://ch.tudelft.nl/events
-            - name: MOLLIE_APIKEY
-              valueFrom:
-                secretKeyRef:
-                  name: payments
-                  key: mollie-key
-            - name: WISVCH_CONNECT_CLIENT_URI
-              value: https://ch.tudelft.nl/events
-            - name: WISVCH_CONNECT_REGISTERED_CLIENT_CLIENT_NAME
-              value: CH Events production
-            - name: WISVCH_CONNECT_REGISTERED_CLIENT_CLIENT_ID
-              value: events
-            - name: WISVCH_CONNECT_REGISTERED_CLIENT_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: events
-                  key: connect-client-secret
-            - name: DD_SERVICE_NAME
-              value: events
-            - name: DD_AGENT_HOST
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: status.hostIP
-            - name: DD_TRACE_SPAN_TAGS
-              value: env:production
-            - name: DD_SERVICE_MAPPING
-              value: postgresql:events-postgresql
-          image: ghcr.io/wisvch/events:20221027-d839015
-          imagePullPolicy: IfNotPresent
-          livenessProbe:
-            failureThreshold: 10
-            httpGet:
-              path: /events/actuator/health
-              port: http
-              scheme: HTTP
-            initialDelaySeconds: 60
-            periodSeconds: 20
-            successThreshold: 1
-            timeoutSeconds: 5
-          ports:
-            - containerPort: 8080
-              name: http
-              protocol: TCP
-          readinessProbe:
-            failureThreshold: 10
-            httpGet:
-              path: /events/actuator/health
-              port: http
-              scheme: HTTP
-            initialDelaySeconds: 30
-            periodSeconds: 20
-            successThreshold: 1
-            timeoutSeconds: 5
-          resources:
-            limits:
-              cpu: 800m
-              memory: 1500Mi
-            requests:
-              cpu: 400m
-              memory: 500Mi
+      - name: events
+        env:
+        - name: MANAGEMENT_CONTEXT_PATH
+          value: /management
+        - name: MANAGEMENT_ENDPOINTS_ENABLED
+          value: "false"
+        - name: MANAGEMENT_ENDPOINTS_HEALTH_ENABLED
+          value: "true"
+        - name: SERVER_PORT
+          value: "8080"
+        - name: SERVER_SERVLET_CONTEXT_PATH
+          value: /events
+        - name: SPRING_MAIL_HOST
+          value: ch.tudelft.nl
+        - name: SPRING_MAIL_PORT
+          value: "25"
+        - name: SPRING_PROFILES_ACTIVE
+          value: production
+        - name: SPRING_HTTP_MULTIPART_MAX_FILE_SIZE
+          value: 5mb
+        - name: JAVA_OPTS
+          value: -Xms128m -Xmx128m -javaagent:/opt/datadog/dd-java-agent.jar
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:postgresql://joost.chnet/events?ssl=true&sslrootcert=/usr/local/share/ca-certificates/wisvch.crt
+        - name: SPRING_DATASOURCE_USERNAME
+          value: events
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: events
+              key: datasource-password
+        - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
+          value: validate
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
+          value: https://connect.ch.tudelft.nl
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENTURI
+          value: https://ch.tudelft.nl/events
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_ID
+          value: events
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: events
+              key: connect-client-secret
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
+          value: openid, profile, email, ldap
+        - name: SPRING_FLYWAY_ENABLE
+          value: "true"
+        - name: SPRING_FLYWAY_SCHEMAS
+          value: event
+        - name: SPRING_FLYWAY_TABLE
+          value: schema_version
+        - name: TZ
+          value: Europe/Amsterdam
+        - name: WISVCH_CONNECT_ADMIN_GROUPS
+          value: chbeheer,dienst2,epa,vc
+        - name: WISVCH_CONNECT_BETA_USERS
+          value: svenp, florisv, daveys, davida, ruthk, gijsw, karimo, willemijnv,
+            svenh, jurriaant, yoshia, joepj, juliand
+        - name: WISVCH_EVENTS_IMAGE_PATH
+          value: https://ch.tudelft.nl/events/api/v1/documents/
+        - name: MOLLIE_CLIENTURI
+          value: https://ch.tudelft.nl/events
+        - name: MOLLIE_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: payments
+              key: mollie-key
+        - name: WISVCH_CONNECT_CLIENT_URI
+          value: https://ch.tudelft.nl/events
+        - name: WISVCH_CONNECT_REGISTERED_CLIENT_CLIENT_NAME
+          value: CH Events production
+        - name: WISVCH_CONNECT_REGISTERED_CLIENT_CLIENT_ID
+          value: events
+        - name: WISVCH_CONNECT_REGISTERED_CLIENT_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: events
+              key: connect-client-secret
+        - name: DD_SERVICE_NAME
+          value: events
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.hostIP
+        - name: DD_TRACE_SPAN_TAGS
+          value: env:production
+        - name: DD_SERVICE_MAPPING
+          value: postgresql:events-postgresql
+        image: ghcr.io/wisvch/events:20221030-3f01f9d
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /events/actuator/health
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 5
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /events/actuator/health
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 800m
+            memory: 1500Mi
+          requests:
+            cpu: 400m
+            memory: 500Mi
