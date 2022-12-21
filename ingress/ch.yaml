@@ -58,6 +58,8 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: 32M
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+         rewrite /events https://events.wisv.ch$uri;
   name: ch
   namespace: default
 spec:
