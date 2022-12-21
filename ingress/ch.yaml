@@ -60,6 +60,8 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: 32M
     nginx.ingress.kubernetes.io/configuration-snippet: |
          rewrite ^/events(.*)$ https://events.wisv.ch$1;
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+         rewrite ^/choice2(.*)$ https://choice.wisv.ch$1;
   name: ch
   namespace: default
 spec:
@@ -67,14 +69,6 @@ spec:
     - host: ch.tudelft.nl
       http:
         paths:
-          # - path: /events/
-          #   backend:
-          #     serviceName: events
-          #     servicePort: 80
-          - path: /payments/
-            backend:
-              serviceName: payments
-              servicePort: 80
           - path: /mail/
             backend:
               serviceName: roundcube
@@ -94,10 +88,6 @@ spec:
           - path: /certs/
             backend:
               serviceName: www-misc
-              servicePort: 80
-          - path: /choice2/
-            backend:
-              serviceName: choice
               servicePort: 80
           - path: /register/
             backend:
