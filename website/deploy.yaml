@@ -53,7 +53,7 @@ spec:
           valueFrom:
             secretKeyRef:
               key: password
-              name: dienst2-api-token
+              name: website-dienst2-api-token
         - name: W3CIE_THEME
           value: https://github.com/WISVCH/rechallenge/archive/master.zip
         - name: W3CIE_PLUGINS
