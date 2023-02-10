@@ -47,6 +47,13 @@ spec:
               name: wordpress-db-password
         - name: WORDPRESS_DB_PREFIX
           value: chtud59_
+        - name: DIENST2_API_URL
+          value: https://dienst2.ch.tudelft.nl/ldb/api/v3/
+        - name: DIENST2_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: dienst2-api-token
         - name: W3CIE_THEME
           value: https://github.com/WISVCH/rechallenge/archive/master.zip
         - name: W3CIE_PLUGINS
