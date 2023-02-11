@@ -7,9 +7,9 @@ metadata:
   labels:
     app: wiki
   annotations:
-    fluxcd.io/automated: 'true'
+    fluxcd.io/automated: "true"
 spec:
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -23,36 +23,36 @@ spec:
         app: wiki
     spec:
       containers:
-      - name: wiki
-        image: requarks/wiki:2.3
-        imagePullPolicy: Always
-        env:
-        - name: DB_TYPE
-          value: "postgres"
-        - name: DB_HOST
-          value: "joost.chnet"
-        - name: DB_PORT
-          value: "5432"
-        - name: DB_USER
-          value: "wiki"
-        - name: DB_PASS
-          valueFrom:
-            secretKeyRef:
-              name: wiki
-              key: datasource-password
-        - name: DB_NAME
-          value: "wiki"
-        ports:
-        - name: http
-          containerPort: 3000
-          protocol: TCP
-        resources:
-          limits:
-            cpu: 500m
-            memory: 1000Mi
-          requests:
-            cpu: 50m
-            memory: 100Mi
+        - name: wiki
+          image: requarks/wiki:2.5
+          imagePullPolicy: Always
+          env:
+            - name: DB_TYPE
+              value: postgres
+            - name: DB_HOST
+              value: joost.chnet
+            - name: DB_PORT
+              value: 5432
+            - name: DB_USER
+              value: wiki
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: wiki
+                  key: datasource-password
+            - name: DB_NAME
+              value: wiki
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1000Mi
+            requests:
+              cpu: 50m
+              memory: 100Mi
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
