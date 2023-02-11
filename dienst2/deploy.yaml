@@ -99,11 +99,10 @@ spec:
       - command:
         - elasticsearch
         - -Enetwork.host=127.0.0.1
+        - -Expack.security.enabled=false
         env:
         - name: ES_JAVA_OPTS
           value: -Xms256M -Xmx256M
-        - name: xpack.security.enabled
-          value: false
         image: elasticsearch:8.6.1
         imagePullPolicy: Always
         name: elasticsearch
