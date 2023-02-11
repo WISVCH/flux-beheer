@@ -101,7 +101,7 @@ spec:
         - -Ees.network.host=127.0.0.1
         env:
         - name: ES_JAVA_OPTS
-          value: -Xms512Mi -Xmx512Mi
+          value: -Xms512M -Xmx512M
         image: elasticsearch:8.6.1
         imagePullPolicy: Always
         name: elasticsearch
