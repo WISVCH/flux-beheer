@@ -101,17 +101,17 @@ spec:
         - -Ees.network.host=127.0.0.1
         env:
         - name: ES_JAVA_OPTS
-          value: -Xms128M -Xmx128M
+          value: -Xms256M -Xmx256M
         image: elasticsearch:8.6.1
         imagePullPolicy: Always
         name: elasticsearch
         resources:
           limits:
             cpu: 100m
-            memory: 300Mi
+            memory: 512M
           requests:
             cpu: 100m
-            memory: 300Mi
+            memory: 300M
         securityContext:
           runAsUser: 1000
         terminationMessagePath: /dev/termination-log
