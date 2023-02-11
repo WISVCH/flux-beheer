@@ -98,7 +98,7 @@ spec:
         terminationMessagePolicy: File
       - command:
         - elasticsearch
-        - -Ees.network.host=127.0.0.1
+        - -Enetwork.host=127.0.0.1
         env:
         - name: ES_JAVA_OPTS
           value: -Xms512M -Xmx512M
