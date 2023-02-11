@@ -55,7 +55,7 @@ spec:
               key: DATABASE_URL
               name: dienst2
         - name: SEARCH_URL
-          value: elasticsearch://127.0.0.1:9300/dienst2_haystack
+          value: elasticsearch://127.0.0.1:9200/dienst2_haystack
         - name: DATADOG_TRACE_AGENT_HOSTNAME
           valueFrom:
             fieldRef:
@@ -98,7 +98,7 @@ spec:
         terminationMessagePolicy: File
       - command:
         - elasticsearch
-        - -Des.network.host=127.0.0.1
+        - -Ees.network.host=127.0.0.1
         env:
         - name: ES_JAVA_OPTS
           value: -Xms128M -Xmx128M
