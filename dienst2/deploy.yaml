@@ -54,12 +54,8 @@ spec:
             secretKeyRef:
               key: DATABASE_URL
               name: dienst2
-        - name: CACHE_URL
-          value: memcache://127.0.0.1:11211
         - name: SEARCH_URL
           value: elasticsearch://127.0.0.1:9200/dienst2_haystack
-        - name: SESSION_ENGINE
-          value: django.contrib.sessions.backends.cache
         - name: DATADOG_TRACE_AGENT_HOSTNAME
           valueFrom:
             fieldRef:
@@ -106,7 +102,7 @@ spec:
         env:
         - name: ES_JAVA_OPTS
           value: -Xms128M -Xmx128M
-        image: elasticsearch:2.4.6
+        image: elasticsearch:8.6.1
         imagePullPolicy: Always
         name: elasticsearch
         resources:
@@ -123,26 +119,6 @@ spec:
         volumeMounts:
         - mountPath: /usr/share/elasticsearch/data
           name: elasticsearch-data
-      - command:
-        - memcached
-        - -l
-        - 127.0.0.1:11211
-        - -m
-        - "32"
-        image: memcached
-        imagePullPolicy: Always
-        name: memcached
-        resources:
-          limits:
-            cpu: 10m
-            memory: 64Mi
-          requests:
-            cpu: 10m
-            memory: 64Mi
-        securityContext:
-          runAsUser: 999
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
