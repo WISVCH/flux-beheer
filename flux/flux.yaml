@@ -28,6 +28,7 @@ spec:
         - --git-email=ChristiaanHuygens@users.noreply.github.com
         - --listen-metrics=:3031
         - --sync-garbage-collection=true
+        - --registry-exclude-image=docker.io/*,index.docker.io/*,quay.io/*,k8s.gcr.io/*
         image: docker.io/fluxcd/flux:1.21.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
