@@ -7,7 +7,7 @@ metadata:
   name: dienst2
   namespace: default
   annotations:
-    fluxcd.io/automated: 'true'
+    fluxcd.io/automated: "true"
     fluxcd.io/tag.elasticsearch: semver:~2
 spec:
   progressDeadlineSeconds: 600
@@ -25,110 +25,110 @@ spec:
     metadata:
       annotations:
         ad.datadoghq.com/gunicorn.check_names: '["gunicorn"]'
-        ad.datadoghq.com/gunicorn.init_configs: '[{}]'
-        ad.datadoghq.com/gunicorn.logs: '[{"source": "gunicorn", "service": "dienst2",
+        ad.datadoghq.com/gunicorn.init_configs: "[{}]"
+        ad.datadoghq.com/gunicorn.logs:
+          '[{"source": "gunicorn", "service": "dienst2",
           "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date",
           "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
       labels:
         app: dienst2
     spec:
       containers:
-      - args:
-        - gunicorn
-        - --workers=4
-        env:
-        - name: OIDC_RP_CLIENT_ID
-          value: dienst2
-        - name: OIDC_RP_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: OIDC_RP_CLIENT_SECRET
-              name: dienst2
-        - name: SECRET_KEY
-          valueFrom:
-            secretKeyRef:
-              key: SECRET_KEY
-              name: dienst2
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              key: DATABASE_URL
-              name: dienst2
-        - name: SEARCH_URL
-          value: elasticsearch://127.0.0.1:9200/dienst2_haystack
-        - name: DATADOG_TRACE_AGENT_HOSTNAME
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: status.hostIP
-        image: ghcr.io/wisvch/dienst2:20230211-ed35458
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /healthz
-            port: 8000
-            scheme: HTTP
-          initialDelaySeconds: 60
-          periodSeconds: 30
-          successThreshold: 1
-          timeoutSeconds: 2
-        name: gunicorn
-        ports:
-        - containerPort: 8000
-          protocol: TCP
-        readinessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /healthz
-            port: 8000
-            scheme: HTTP
-          initialDelaySeconds: 30
-          periodSeconds: 30
-          successThreshold: 1
-          timeoutSeconds: 2
-        resources:
-          limits:
-            cpu: 400m
-            memory: 512Mi
-          requests:
-            cpu: 400m
-            memory: 512Mi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-      - command:
-        - elasticsearch
-        - -Enetwork.host=127.0.0.1
-        - -Expack.security.enabled=false
-        env:
-        - name: ES_JAVA_OPTS
-          value: -Xms256M -Xmx256M
-        image: elasticsearch:8.6.1
-        imagePullPolicy: Always
-        name: elasticsearch
-        resources:
-          limits:
-            cpu: 300m
-            memory: 512Gi
-          requests:
-            cpu: 100m
-            memory: 300M
-        securityContext:
-          runAsUser: 1000
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /usr/share/elasticsearch/data
-          name: elasticsearch-data
+        - args:
+            - gunicorn
+            - --workers=4
+          env:
+            - name: OIDC_RP_CLIENT_ID
+              value: dienst2
+            - name: OIDC_RP_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: OIDC_RP_CLIENT_SECRET
+                  name: dienst2
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: SECRET_KEY
+                  name: dienst2
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  key: DATABASE_URL
+                  name: dienst2
+            - name: SEARCH_URL
+              value: elasticsearch://127.0.0.1:9200/dienst2_haystack
+            - name: DATADOG_TRACE_AGENT_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.hostIP
+          image: ghcr.io/wisvch/dienst2:20230211-ed35458
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 2
+          name: gunicorn
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 2
+          resources:
+            limits:
+              cpu: 400m
+              memory: 512Mi
+            requests:
+              cpu: 400m
+              memory: 512Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        - command:
+            - elasticsearch
+            - -Des.network.host=127.0.0.1
+          env:
+            - name: ES_JAVA_OPTS
+              value: -Xms128M -Xmx128M
+          image: elasticsearch:2.4.6
+          imagePullPolicy: Always
+          name: elasticsearch
+          resources:
+            limits:
+              cpu: 100m
+              memory: 300Mi
+            requests:
+              cpu: 100m
+              memory: 300Mi
+          securityContext:
+            runAsUser: 1000
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /usr/share/elasticsearch/data
+              name: elasticsearch-data
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: config
-        secret:
-          defaultMode: 420
-          secretName: dienst2
-      - emptyDir: {}
-        name: elasticsearch-data
+        - name: config
+          secret:
+            defaultMode: 420
+            secretName: dienst2
+        - emptyDir: {}
+          name: elasticsearch-data
