@@ -10,7 +10,7 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License. 
+# limitations under the License.
 
 apiVersion: v1
 kind: Namespace
@@ -18,7 +18,6 @@ metadata:
   name: kubernetes-dashboard
 
 ---
-
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -28,7 +27,6 @@ metadata:
   namespace: kubernetes-dashboard
 
 ---
-
 kind: Service
 apiVersion: v1
 metadata:
@@ -38,14 +36,13 @@ metadata:
   namespace: kubernetes-dashboard
 spec:
   ports:
-  - port: 80
-    protocol: TCP
-    targetPort: http
+    - port: 80
+      protocol: TCP
+      targetPort: http
   selector:
     k8s-app: kubernetes-dashboard
 
 ---
-
 apiVersion: v1
 kind: Secret
 metadata:
@@ -56,7 +53,6 @@ metadata:
 type: Opaque
 
 ---
-
 apiVersion: v1
 kind: Secret
 metadata:
@@ -69,7 +65,6 @@ data:
   csrf: ""
 
 ---
-
 apiVersion: v1
 kind: Secret
 metadata:
@@ -80,7 +75,6 @@ metadata:
 type: Opaque
 
 ---
-
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -90,7 +84,6 @@ metadata:
   namespace: kubernetes-dashboard
 
 ---
-
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -99,28 +92,39 @@ metadata:
   name: kubernetes-dashboard
   namespace: kubernetes-dashboard
 rules:
-# Allow Dashboard to get, update and delete Dashboard exclusive secrets.
-- apiGroups: [""]
-  resources: ["secrets"]
-  resourceNames: ["kubernetes-dashboard-key-holder", "kubernetes-dashboard-certs", "kubernetes-dashboard-csrf"]
-  verbs: ["get", "update", "delete"]
-  # Allow Dashboard to get and update 'kubernetes-dashboard-settings' config map.
-- apiGroups: [""]
-  resources: ["configmaps"]
-  resourceNames: ["kubernetes-dashboard-settings"]
-  verbs: ["get", "update"]
-  # Allow Dashboard to get metrics.
-- apiGroups: [""]
-  resources: ["services"]
-  resourceNames: ["heapster", "dashboard-metrics-scraper"]
-  verbs: ["proxy"]
-- apiGroups: [""]
-  resources: ["services/proxy"]
-  resourceNames: ["heapster", "http:heapster:", "https:heapster:", "dashboard-metrics-scraper", "http:dashboard-metrics-scraper"]
-  verbs: ["get"]
+  # Allow Dashboard to get, update and delete Dashboard exclusive secrets.
+  - apiGroups: [""]
+    resources: ["secrets"]
+    resourceNames:
+      [
+        "kubernetes-dashboard-key-holder",
+        "kubernetes-dashboard-certs",
+        "kubernetes-dashboard-csrf",
+      ]
+    verbs: ["get", "update", "delete"]
+    # Allow Dashboard to get and update 'kubernetes-dashboard-settings' config map.
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    resourceNames: ["kubernetes-dashboard-settings"]
+    verbs: ["get", "update"]
+    # Allow Dashboard to get metrics.
+  - apiGroups: [""]
+    resources: ["services"]
+    resourceNames: ["heapster", "dashboard-metrics-scraper"]
+    verbs: ["proxy"]
+  - apiGroups: [""]
+    resources: ["services/proxy"]
+    resourceNames:
+      [
+        "heapster",
+        "http:heapster:",
+        "https:heapster:",
+        "dashboard-metrics-scraper",
+        "http:dashboard-metrics-scraper",
+      ]
+    verbs: ["get"]
 
 ---
-
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -128,13 +132,12 @@ metadata:
     k8s-app: kubernetes-dashboard
   name: kubernetes-dashboard
 rules:
-# Allow Metrics Scraper to get metrics from the Metrics server
-- apiGroups: ["metrics.k8s.io"]
-  resources: ["pods", "nodes"]
-  verbs: ["get", "list", "watch"]
+  # Allow Metrics Scraper to get metrics from the Metrics server
+  - apiGroups: ["metrics.k8s.io"]
+    resources: ["pods", "nodes"]
+    verbs: ["get", "list", "watch"]
 
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -147,12 +150,11 @@ roleRef:
   kind: Role
   name: kubernetes-dashboard
 subjects:
-- kind: ServiceAccount
-  name: kubernetes-dashboard
-  namespace: kubernetes-dashboard
+  - kind: ServiceAccount
+    name: kubernetes-dashboard
+    namespace: kubernetes-dashboard
 
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -162,12 +164,11 @@ roleRef:
   kind: ClusterRole
   name: kubernetes-dashboard
 subjects:
-- kind: ServiceAccount
-  name: kubernetes-dashboard
-  namespace: kubernetes-dashboard
+  - kind: ServiceAccount
+    name: kubernetes-dashboard
+    namespace: kubernetes-dashboard
 
 ---
-
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -187,67 +188,66 @@ spec:
         k8s-app: kubernetes-dashboard
     spec:
       containers:
-      - name: kubernetes-dashboard
-        image: kubernetesui/dashboard:v2.0.0
-        imagePullPolicy: Always
-        args:
-        - --enable-insecure-login
-        - --namespace=kubernetes-dashboard
-        ports:
-        - containerPort: 9090
-          protocol: TCP
-        volumeMounts:
-        - name: kubernetes-dashboard-certs
-          mountPath: /certs
-          # Create on-disk volume to store exec logs
-        - mountPath: /tmp
-          name: tmp-volume
-        livenessProbe:
-          httpGet:
-            scheme: HTTP
-            path: /
-            port: 9090
-          initialDelaySeconds: 30
-          timeoutSeconds: 30
-        securityContext:
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
-          runAsUser: 1001
-          runAsGroup: 2001
-      - name: oidc-proxy
-        image: quay.io/wisvch/oidc-proxy:dev-1553867950
-        imagePullPolicy: IfNotPresent
-        args:
-        - --config
-        - /config/config.yml
-        ports:
-        - containerPort: 3000
-          name: http
-          protocol: TCP
-        volumeMounts:
-        - mountPath: /config
-          name: config
-          readOnly: true
+        - name: kubernetes-dashboard
+          image: kubernetesui/dashboard:v2.0.0
+          imagePullPolicy: Always
+          args:
+            - --enable-insecure-login
+            - --namespace=kubernetes-dashboard
+          ports:
+            - containerPort: 9090
+              protocol: TCP
+          volumeMounts:
+            - name: kubernetes-dashboard-certs
+              mountPath: /certs
+              # Create on-disk volume to store exec logs
+            - mountPath: /tmp
+              name: tmp-volume
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /
+              port: 9090
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsUser: 1001
+            runAsGroup: 2001
+        - name: oidc-proxy
+          image: ghcr.io/wisvch/oidc-proxy:dev-1553867950
+          imagePullPolicy: IfNotPresent
+          args:
+            - --config
+            - /config/config.yml
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+              readOnly: true
       volumes:
-      - name: kubernetes-dashboard-certs
-        secret:
-          secretName: kubernetes-dashboard-certs
-      - name: tmp-volume
-        emptyDir: {}
-      - name: config
-        secret:
-          secretName: kubernetes-dashboard-oidc-proxy-config
-          defaultMode: 420
+        - name: kubernetes-dashboard-certs
+          secret:
+            secretName: kubernetes-dashboard-certs
+        - name: tmp-volume
+          emptyDir: {}
+        - name: config
+          secret:
+            secretName: kubernetes-dashboard-oidc-proxy-config
+            defaultMode: 420
       serviceAccountName: kubernetes-dashboard
       nodeSelector:
         "kubernetes.io/os": linux
       # Comment the following tolerations if Dashboard must not be deployed on master
       tolerations:
-      - key: node-role.kubernetes.io/master
-        effect: NoSchedule
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
 
 ---
-
 kind: Service
 apiVersion: v1
 metadata:
@@ -257,13 +257,12 @@ metadata:
   namespace: kubernetes-dashboard
 spec:
   ports:
-  - port: 8000
-    targetPort: 8000
+    - port: 8000
+      targetPort: 8000
   selector:
     k8s-app: dashboard-metrics-scraper
 
 ---
-
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -283,33 +282,33 @@ spec:
         k8s-app: dashboard-metrics-scraper
     spec:
       containers:
-      - name: dashboard-metrics-scraper
-        image: kubernetesui/metrics-scraper:v1.0.4
-        ports:
-        - containerPort: 8000
-          protocol: TCP
-        livenessProbe:
-          httpGet:
-            scheme: HTTP
-            path: /
-            port: 8000
-          initialDelaySeconds: 30
-          timeoutSeconds: 30
-        volumeMounts:
-        - mountPath: /tmp
-          name: tmp-volume
-        securityContext:
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
-          runAsUser: 1001
-          runAsGroup: 2001
+        - name: dashboard-metrics-scraper
+          image: kubernetesui/metrics-scraper:v1.0.4
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /
+              port: 8000
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp-volume
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsUser: 1001
+            runAsGroup: 2001
       serviceAccountName: kubernetes-dashboard
       nodeSelector:
         "kubernetes.io/os": linux
       # Comment the following tolerations if Dashboard must not be deployed on master
       tolerations:
-      - key: node-role.kubernetes.io/master
-        effect: NoSchedule
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
       volumes:
-      - name: tmp-volume
-        emptyDir: {}
+        - name: tmp-volume
+          emptyDir: {}
