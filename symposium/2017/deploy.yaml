@@ -19,7 +19,7 @@ spec:
         app: symposium-2017
     spec:
       containers:
-      - image: quay.io/wisvch/symposium-2017:32
+      - image: ghcr.io/wisvch/symposium-2017:32
         imagePullPolicy: IfNotPresent
         name: symposium-2017
         ports:
