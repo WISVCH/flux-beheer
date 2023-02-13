@@ -55,6 +55,8 @@ spec:
                 secretKeyRef:
                   key: DATABASE_URL
                   name: dienst2
+            - name: CACHE_URL
+              value: locmemcache://
             - name: SEARCH_URL
               value: elasticsearch://127.0.0.1:9200/dienst2_haystack
             - name: DATADOG_TRACE_AGENT_HOSTNAME
