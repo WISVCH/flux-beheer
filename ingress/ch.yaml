@@ -61,6 +61,7 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       rewrite ^/events(.*)$ https://events.wisv.ch$1;
       rewrite ^/choice2(.*)$ https://choice.wisv.ch$1;
+      rewrite ^/wiki(.*)$ https://wiki.wisv.ch$1;
   name: ch
   namespace: default
 spec:
@@ -216,13 +217,6 @@ spec:
         paths:
           - backend:
               serviceName: rob
-              servicePort: 443
-    - host: ch.tudelft.nl
-      http:
-        paths:
-          - path: /wiki
-            backend:
-              serviceName: frans
               servicePort: 443
     - host: coh.ewi.tudelft.nl
       http:
