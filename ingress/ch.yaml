@@ -10,15 +10,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: frans
-  namespace: default
-spec:
-  externalName: frans.chnet
-  type: ExternalName
----
-apiVersion: v1
-kind: Service
-metadata:
   name: hendrik
   namespace: default
 spec:
