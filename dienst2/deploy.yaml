@@ -64,7 +64,7 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: status.hostIP
-          image: ghcr.io/wisvch/dienst2:20230217-8c72bc5
+          image: ghcr.io/wisvch/dienst2:20230223-edcf122
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
