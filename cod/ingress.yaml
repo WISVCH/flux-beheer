@@ -4,7 +4,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/temporal-redirect: https://cod.wisv.ch/
   name: redirect-cod
-  namespace: default
+  namespace: w3cie
 spec:
   rules:
     - host: cod.ch.tudelft.nl
