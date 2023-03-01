@@ -25,9 +25,8 @@ spec:
   - protocol: TCP
     port: 80
 ---
-
-kind: Endpoints
 apiVersion: v1
+kind: Endpoints
 metadata:
   name: gcloud
 subsets:
@@ -35,7 +34,6 @@ subsets:
   - ip: 35.204.128.131
   ports:
   - port: 80
-  - port: 443
 ---
 apiVersion: v1
 kind: Service
