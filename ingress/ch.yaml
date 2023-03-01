@@ -19,6 +19,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: gcloud
+  namespace: default
+spec:
+  externalName: wisv.ch
+  type: ExternalName
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: website
   namespace: default
 spec:
@@ -264,7 +273,7 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: rob
+              serviceName: gcloud
               servicePort: 443
   tls:
     - hosts:
