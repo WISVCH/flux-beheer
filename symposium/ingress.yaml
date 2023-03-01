@@ -9,19 +9,19 @@ spec:
       http:
         paths:
         - backend:
-            serviceName: symposium-2017
+            serviceName: gcloud
             servicePort: 80
           path: /2017
         - backend:
-            serviceName: symposium-2018
+            serviceName: gcloud
             servicePort: 80
           path: /2018/
         - backend:
-            serviceName: symposium-2020
+            serviceName: gcloud
             servicePort: 80
           path: /2020/
         - backend:
-            serviceName: symposium-2022
+            serviceName: gcloud
             servicePort: 80
           path: /2022/
   tls:
@@ -44,7 +44,7 @@ spec:
         paths:
           - path: /$
             backend:
-              serviceName: symposium-2022
+              serviceName: gcloud
               servicePort: 80
   tls:
     - hosts:
