@@ -9,43 +9,21 @@ spec:
       http:
         paths:
         - backend:
-            serviceName: symposium-2017
+            serviceName: gcloud
             servicePort: 80
           path: /2017
         - backend:
-            serviceName: symposium-2018
+            serviceName: gcloud
             servicePort: 80
           path: /2018/
         - backend:
-            serviceName: symposium-2020
+            serviceName: gcloud
             servicePort: 80
           path: /2020/
         - backend:
             serviceName: symposium-2022
             servicePort: 80
           path: /2022/
-  tls:
-    - hosts:
-        - symposium.ch.tudelft.nl
-      secretName: ingress-ext-tls
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/temporal-redirect: https://symposium.ch.tudelft.nl/2022/
-    nginx.ingress.kubernetes.io/use-regex: "true"
-  name: symposium-redirect
-  namespace: default
-spec:
-  rules:
-    - host: symposium.ch.tudelft.nl
-      http:
-        paths:
-          - path: /$
-            backend:
-              serviceName: symposium-2022
-              servicePort: 80
   tls:
     - hosts:
         - symposium.ch.tudelft.nl
