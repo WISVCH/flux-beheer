@@ -31,7 +31,7 @@ metadata:
   name: gcloud
 subsets:
 - addresses:
-  - ip: 35.204.128.131
+  - ip: 34.141.157.28
   ports:
   - port: 80
 ---
