@@ -253,8 +253,8 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: rob
-              servicePort: 443
+              serviceName: gcloud
+              servicePort: 80
     - host: dkp.tudelft.nl
       http:
         paths:
@@ -265,8 +265,8 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: rob
-              servicePort: 443
+              serviceName: gcloud
+              servicePort: 80
     - host: lists.ch.tudelft.nl
       http:
         paths:
@@ -283,8 +283,8 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: rob
-              servicePort: 443
+              serviceName: gcloud
+              servicePort: 80
   tls:
     - hosts:
         - ch.tudelft.nl
