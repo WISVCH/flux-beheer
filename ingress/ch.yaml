@@ -277,14 +277,14 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: rob
-              servicePort: 443
+              serviceName: gcloud
+              servicePort: 80
     - host: symposium.ch.tudelft.nl # Legacy redirect for the 2010 site
       http:
         paths:
           - backend:
-              serviceName: rob
-              servicePort: 443
+              serviceName: gcloud
+              servicePort: 80
   tls:
     - hosts:
         - ch.tudelft.nl
