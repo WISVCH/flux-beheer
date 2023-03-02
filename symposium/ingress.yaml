@@ -14,7 +14,7 @@ spec:
           path: /2017
         - backend:
             serviceName: symposium-2017
-            servicePort: 80
+            servicePort: 443
           path: /2018/
         - backend:
             serviceName: gcloud
