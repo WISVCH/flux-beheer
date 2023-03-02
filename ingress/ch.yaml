@@ -265,8 +265,8 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: gcloud
-              servicePort: 80
+              serviceName: rob
+              servicePort: 443
     - host: lists.ch.tudelft.nl
       http:
         paths:
