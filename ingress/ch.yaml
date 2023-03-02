@@ -283,8 +283,8 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: gcloud
-              servicePort: 80
+              serviceName: rob
+              servicePort: 443
   tls:
     - hosts:
         - ch.tudelft.nl
