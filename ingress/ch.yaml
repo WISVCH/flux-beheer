@@ -203,6 +203,43 @@ kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 32M
+  name: proxy-cloud
+  namespace: default
+spec:
+  rules:
+    - host: eerstejaarsweekend.nl
+      http:
+        paths:
+          - backend:
+              serviceName: gcloud
+              servicePort: 80
+    - host: lustrum.ch
+      http:
+        paths:
+          - backend:
+              serviceName: gcloud
+              servicePort: 80
+    - host: symposium.ch.tudelft.nl # Legacy redirect for the 2010 site
+      http:
+        paths:
+          - backend:
+              serviceName: gcloud
+              servicePort: 80
+  tls:
+    - hosts:
+        - eerstejaarsweekend.nl
+        - lustrum.ch
+        - symposium.ch.tudelft.nl
+        - www.eerstejaarsweekend.nl
+        - www.lustrum.ch
+      secretName: ingress-ext-tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/proxy-body-size: 32M
     nginx.ingress.kubernetes.io/server-snippet: |
@@ -237,12 +274,6 @@ spec:
           - backend:
               serviceName: rob
               servicePort: 443
-    - host: businesstour.ch.tudelft.nl
-      http:
-        paths:
-          - backend:
-              serviceName: rob
-              servicePort: 443
     - host: coh.ewi.tudelft.nl
       http:
         paths:
@@ -253,15 +284,9 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: gcloud
-              servicePort: 80
-    - host: dkp.tudelft.nl
-      http:
-        paths:
-          - backend:
               serviceName: rob
               servicePort: 443
-    - host: eerstejaarsweekend.nl
+    - host: dkp.tudelft.nl
       http:
         paths:
           - backend:
@@ -273,18 +298,6 @@ spec:
           - backend:
               serviceName: hendrik
               servicePort: 443
-    - host: lustrum.ch
-      http:
-        paths:
-          - backend:
-              serviceName: gcloud
-              servicePort: 80
-    - host: symposium.ch.tudelft.nl # Legacy redirect for the 2010 site
-      http:
-        paths:
-          - backend:
-              serviceName: gcloud
-              servicePort: 80
   tls:
     - hosts:
         - ch.tudelft.nl
@@ -300,18 +313,13 @@ spec:
         - coh.ewi.tudelft.nl
         - connect.ch.tudelft.nl
         - dkp.tudelft.nl
-        - eerstejaarsweekend.nl
         - files.ch.tudelft.nl
         - hendrik.ch.tudelft.nl
         - icpc.tudelft.nl
         - lists.ch.tudelft.nl
-        - lustrum.ch
         - rob.ch.tudelft.nl
-        - symposium.ch.tudelft.nl
         - www.ch.tudelft.nl
-        - www.eerstejaarsweekend.nl
         - www.icpc.tudelft.nl
-        - www.lustrum.ch
       secretName: ingress-ext-tls
 ---
 apiVersion: cert-manager.io/v1alpha2
