@@ -226,6 +226,48 @@ spec:
           - backend:
               serviceName: gcloud
               servicePort: 80
+    - host: coh.ewi.tudelft.nl
+      http:
+        paths:
+          - path: /nostalgia/
+            backend:
+              serviceName: gcloud
+              servicePort: 80
+    - host: commissies.tudelft.nl
+      http:
+        paths:
+          - path: /beeld/
+            backend:
+              serviceName: gcloud
+              servicePort: 80
+          - path: /dvhj/
+            backend:
+              serviceName: gcloud
+              servicePort: 80
+          - path: /filmcrew/
+            backend:
+              serviceName: gcloud
+              servicePort: 80
+          - path: /pi/
+            backend:
+              serviceName: gcloud
+              servicePort: 80
+          - path: /sjaarcie/
+            backend:
+              serviceName: gcloud
+              servicePort: 80
+          - path: /verdiepcie/
+            backend:
+              serviceName: gcloud
+              servicePort: 80
+          - path: /wifi/
+            backend:
+              serviceName: gcloud
+              servicePort: 80
+          - path: /wocky
+            backend:
+              serviceName: gcloud
+              servicePort: 80
   tls:
     - hosts:
         - eerstejaarsweekend.nl
