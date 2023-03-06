@@ -29,7 +29,7 @@ spec:
       - name: feedback-tool
         env:
         - name: JAVA_OPTS
-          value: -Xms200m -Xmx200m -javaagent:/opt/datadog/dd-java-agent.jar
+          value: -Xms200m -Xmx200m
         - name: SERVER_PORT
           value: "8080"
         - name: SPRING_PROFILES_ACTIVE
@@ -48,17 +48,6 @@ spec:
           value: feedback-tool
         - name: WISVCH_RECAPTCHA_VERIFYURI
           value: https://www.google.com/recaptcha/api/siteverify
-        - name: DD_SERVICE_NAME
-          value: feedback-tool
-        - name: DD_AGENT_HOST
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: status.hostIP
-        - name: DD_TRACE_SPAN_TAGS
-          value: env:production
-        - name: DD_SERVICE_MAPPING
-          value: postgresql:feedback-tool-postgresql
         envFrom:
         - secretRef:
             name: feedback-tool

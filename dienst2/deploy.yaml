@@ -23,13 +23,6 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        ad.datadoghq.com/gunicorn.check_names: '["gunicorn"]'
-        ad.datadoghq.com/gunicorn.init_configs: "[{}]"
-        ad.datadoghq.com/gunicorn.logs:
-          '[{"source": "gunicorn", "service": "dienst2",
-          "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date",
-          "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
       labels:
         app: dienst2
     spec:
@@ -59,11 +52,6 @@ spec:
               value: locmemcache://
             - name: SEARCH_URL
               value: elasticsearch://127.0.0.1:9200/dienst2_haystack
-            - name: DATADOG_TRACE_AGENT_HOSTNAME
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: status.hostIP
           image: ghcr.io/wisvch/dienst2:20230223-edcf122
           imagePullPolicy: IfNotPresent
           livenessProbe:

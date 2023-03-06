@@ -44,7 +44,7 @@ spec:
         - name: SPRING_MAIL_PORT
           value: "25"
         - name: JAVA_OPTS
-          value: -Xms512m -Xmx512m -javaagent:/opt/datadog/dd-java-agent.jar
+          value: -Xms512m -Xmx512m
         - name: SPRING_PROFILES_ACTIVE
           value: production
         - name: SPRING_DATASOURCE_URL
@@ -81,17 +81,6 @@ spec:
             secretKeyRef:
               name: member-registration
               key: dienst-api-token
-        - name: DD_SERVICE_NAME
-          value: member-registration
-        - name: DD_AGENT_HOST
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: status.hostIP
-        - name: DD_TRACE_SPAN_TAGS
-          value: env:production
-        - name: DD_SERVICE_MAPPING
-          value: postgresql:member-registration-postgresql
         image: ghcr.io/wisvch/member-registration:20220402-f02579d
         imagePullPolicy: IfNotPresent
         ports:

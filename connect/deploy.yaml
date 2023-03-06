@@ -30,15 +30,6 @@ spec:
         - name: JAVA_OPTS
           value: -Xms400m -Xmx400m -XX:+ExitOnOutOfMemoryError -Djava.security.egd=file:/dev/./urandom
             -Dspring.config.location=/connect/application.properties -Dspring.profiles.active=production
-        - name: DD_AGENT_HOST
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: status.hostIP
-        - name: DD_TRACE_SPAN_TAGS
-          value: env:production
-        - name: DD_SERVICE_MAPPING
-          value: postgresql:connect-postgresql
         image: ghcr.io/wisvch/connect:20230303-7f621e3
         imagePullPolicy: IfNotPresent
         livenessProbe:

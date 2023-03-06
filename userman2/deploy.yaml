@@ -33,14 +33,6 @@ spec:
           args:
             - gunicorn
             - --workers=4
-          env:
-            - name: DATADOG_TRACE_AGENT_HOSTNAME
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: status.hostIP
-            - name: DATADOG_ENV
-              value: production
           resources:
             requests:
               cpu: 10m

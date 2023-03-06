@@ -28,12 +28,6 @@ spec:
     spec:
       containers:
       - name: modify-password
-        env:
-        - name: DD_AGENT_HOST
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: status.hostIP
         image: ghcr.io/wisvch/modify-password:20220202-69f2bd6
         imagePullPolicy: IfNotPresent
         livenessProbe:
