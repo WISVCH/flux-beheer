@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: flitcie-gallery3
-        image: ghcr.io/wisvch/flitcie-gallery3:20220302-ad3158c
+        image: ghcr.io/wisvch/flitcie-gallery3:20230312-ad3158c@sha256:7f6520bdb84a658140d3c3ec94f3b1243e3e0c53c97c9c3d482d30456adfb2f7
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080

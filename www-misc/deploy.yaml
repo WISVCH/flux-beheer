@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: www-misc
-        image: ghcr.io/wisvch/www-misc:20230203-413a3e0
+        image: ghcr.io/wisvch/www-misc:20230302-413a3e0@sha256:f4b8570e1d5648754bc04229658b9fcef5bb6344b515dd6d61c528d8be2c519f
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080

@@ -30,7 +30,7 @@ spec:
         - name: JAVA_OPTS
           value: -Xms400m -Xmx400m -XX:+ExitOnOutOfMemoryError -Djava.security.egd=file:/dev/./urandom
             -Dspring.config.location=/connect/application.properties -Dspring.profiles.active=production
-        image: ghcr.io/wisvch/connect:20230303-7f621e3
+        image: ghcr.io/wisvch/connect:20230311-c0046bd@sha256:59d9bdec49c1c0f0764eae57c62036eb964040ebdb03db81171faef5399fe2a9
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3

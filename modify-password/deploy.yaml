@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: modify-password
-        image: ghcr.io/wisvch/modify-password:20230312-b18a60c
+        image: ghcr.io/wisvch/modify-password:20230312-deaf3c8@sha256:aacc3ec6572ac891b5882fe5025f109d2398da941d070c9c3cc96cbc16c5e5c6
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
