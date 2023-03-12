@@ -29,7 +29,7 @@ spec:
         - --listen-metrics=:3031
         - --sync-garbage-collection=true
         - --registry-exclude-image=docker.io/*,index.docker.io/*,k8s.gcr.io/*
-        image: docker.io/fluxcd/flux:1.21.0
+        image: docker.io/fluxcd/flux:1.25.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
