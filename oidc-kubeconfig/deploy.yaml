@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: oidc-kubeconfig
-        image: ghcr.io/wisvch/oidc-kubeconfig:20220502-9f95dd6
+        image: ghcr.io/wisvch/oidc-kubeconfig:20230312-590038d@sha256:d5f6a8baac04310f6edb4b8f3828ab8dc9803e995bc0f07a268570f275f74548
         imagePullPolicy: IfNotPresent
         envFrom:
         - secretRef:

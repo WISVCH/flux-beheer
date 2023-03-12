@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: website
-        image: ghcr.io/wisvch/website:20230210-387697a
+        image: ghcr.io/wisvch/website:20230302-387697a@sha256:7f375ee0967f36e3d48a3ad81650de241d737c0ddcd169d1b9581ab961662774
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

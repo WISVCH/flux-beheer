@@ -81,7 +81,7 @@ spec:
             secretKeyRef:
               name: member-registration
               key: dienst-api-token
-        image: ghcr.io/wisvch/member-registration:20220402-f02579d
+        image: ghcr.io/wisvch/member-registration:20230312-f02579d@sha256:80cb30e48582cf7c71c2161a249402afc8c558baec48f1b1b72f66326bf17cee
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9000
