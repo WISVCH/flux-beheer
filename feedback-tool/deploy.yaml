@@ -36,7 +36,7 @@ spec:
           value: production
         - name: SERVER_SERVLET_CONTEXT_PATH
           value: /feedback
-         - name: SERVER_FORWARD_HEADERS_STRATEGY
+        - name: SERVER_FORWARD_HEADERS_STRATEGY
           value: framework
         - name: SPRING_DATASOURCE_URL
           value: jdbc:postgresql://joost.chnet/feedbacktool?ssl=true&sslrootcert=/usr/local/share/ca-certificates/wisvch.crt
