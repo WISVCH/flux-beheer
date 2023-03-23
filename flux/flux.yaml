@@ -19,7 +19,6 @@ spec:
     spec:
       containers:
       - args:
-        - --memcached-service=
         - --ssh-keygen-dir=/var/fluxd/keygen
         - --git-url=git@github.com:WISVCH/flux-beheer.git
         - --git-branch=master
@@ -28,7 +27,7 @@ spec:
         - --git-email=ChristiaanHuygens@users.noreply.github.com
         - --listen-metrics=:3031
         - --sync-garbage-collection=true
-        - --registry-exclude-image=docker.io/*,index.docker.io/*,k8s.gcr.io/*
+        - --registry-disable-scanning
         image: docker.io/fluxcd/flux:1.25.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
