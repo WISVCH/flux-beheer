@@ -6,8 +6,6 @@ metadata:
   namespace: w3cie
   labels:
     app: flitcie-gallery3
-  annotations:
-    fluxcd.io/automated: 'true'
 spec:
   replicas: 1
   revisionHistoryLimit: 5

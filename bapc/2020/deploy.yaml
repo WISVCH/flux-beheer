@@ -6,8 +6,6 @@ metadata:
   namespace: default
   labels:
     app: bapc-2020
-  annotations:
-    fluxcd.io/automated: 'true'
 spec:
   replicas: 2
   revisionHistoryLimit: 5

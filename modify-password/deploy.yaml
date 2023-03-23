@@ -6,8 +6,6 @@ metadata:
   namespace: default
   labels:
     app: modify-password
-  annotations:
-    fluxcd.io/automated: 'true'
 spec:
   progressDeadlineSeconds: 600
   replicas: 2

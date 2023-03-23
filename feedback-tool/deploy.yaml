@@ -6,8 +6,6 @@ metadata:
   namespace: default
   labels:
     app: feedback-tool
-  annotations:
-    fluxcd.io/automated: 'true'
 spec:
   replicas: 1
   revisionHistoryLimit: 5
