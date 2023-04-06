@@ -83,10 +83,6 @@ spec:
             backend:
               serviceName: roundcube
               servicePort: 80
-          - path: /feedback/
-            backend:
-              serviceName: feedback-tool
-              servicePort: 80
           - path: /password/
             backend:
               serviceName: modify-password
