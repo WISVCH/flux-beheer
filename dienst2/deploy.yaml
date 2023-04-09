@@ -49,7 +49,9 @@ spec:
                   name: dienst2
             - name: CACHE_URL
               value: locmemcache://
-          image: ghcr.io/wisvch/dienst2:20230316-44f1cf2@sha256:25d6c5cf75fa406fcd1602a7417a9edf0fac3ed9b8dfe38d5584dcccf5947177
+            - name: GOOGLE_SERVICE_ACCOUNT_DELEGATED_USER
+              value: root@ch.tudelft.nl
+          image: ghcr.io/wisvch/dienst2:20230409-659b740@sha256:1772571fc6a54827da78016a6232fe90187630109305306208d6e86b2e2ef2cc
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
