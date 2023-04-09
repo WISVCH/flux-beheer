@@ -87,8 +87,9 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
-            - mountPath: /config
-              name: config
+            - mountPath: /srv/google-service-account.json
+              name: google-service-account
+              subPath: google-service-account.json
               readOnly: true
       dnsPolicy: ClusterFirst
       restartPolicy: Always
@@ -96,7 +97,7 @@ spec:
       securityContext: {}
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: config
+        - name: google-service-account
           secret:
             defaultMode: 420
             secretName: dienst2
