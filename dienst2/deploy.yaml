@@ -51,7 +51,7 @@ spec:
               value: locmemcache://
             - name: GOOGLE_SERVICE_ACCOUNT_DELEGATED_USER
               value: root@ch.tudelft.nl
-          image: ghcr.io/wisvch/dienst2:20230409-659b740@sha256:1772571fc6a54827da78016a6232fe90187630109305306208d6e86b2e2ef2cc
+          image: ghcr.io/wisvch/dienst2:20230410-d5ebb0b@sha256:c64209079f8aca623ed079ace1ba80fa6d824ffeaa30c3b7a87e21b20c0c455c
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
