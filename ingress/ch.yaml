@@ -152,7 +152,7 @@ spec:
   tls:
     - hosts:
         - cod.ch.tudelft.nl
-      secretName: cod-tls
+      secretName: ingress-ext-tls
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -336,6 +336,7 @@ spec:
     - ch.ewi.tudelft.nl
     - ch.its.tudelft.nl
     - coh.ewi.tudelft.nl
+    - cod.ch.tudelft.nl
     - commissies.ch.tudelft.nl
     - connect.ch.tudelft.nl
     - dkp.tudelft.nl
