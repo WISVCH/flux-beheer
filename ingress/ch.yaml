@@ -285,12 +285,6 @@ spec:
           - backend:
               serviceName: rob
               servicePort: 443
-    - host: lists.ch.tudelft.nl
-      http:
-        paths:
-          - backend:
-              serviceName: hendrik
-              servicePort: 443
   tls:
     - hosts:
         - ch.tudelft.nl
@@ -305,7 +299,6 @@ spec:
         - files.ch.tudelft.nl
         - hendrik.ch.tudelft.nl
         - icpc.tudelft.nl
-        - lists.ch.tudelft.nl
         - rob.ch.tudelft.nl
         - www.ch.tudelft.nl
         - www.icpc.tudelft.nl
@@ -334,7 +327,6 @@ spec:
     - files.ch.tudelft.nl
     - hendrik.ch.tudelft.nl
     - icpc.tudelft.nl
-    - lists.ch.tudelft.nl
     - lustrum.ch
     - rob.ch.tudelft.nl
     - symposium.ch.tudelft.nl
