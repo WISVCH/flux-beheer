@@ -83,10 +83,6 @@ spec:
             backend:
               serviceName: modify-password
               servicePort: 80
-          - path: /other/
-            backend:
-              serviceName: www-misc
-              servicePort: 80
           - path: /certs/
             backend:
               serviceName: www-misc
