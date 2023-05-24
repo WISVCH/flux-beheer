@@ -79,10 +79,6 @@ spec:
     - host: ch.tudelft.nl
       http:
         paths:
-          - path: /mail/
-            backend:
-              serviceName: roundcube
-              servicePort: 80
           - path: /password/
             backend:
               serviceName: modify-password
