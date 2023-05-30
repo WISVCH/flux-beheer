@@ -273,8 +273,8 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: rob
-              servicePort: 443
+              serviceName: gcloud
+              servicePort: 80
     - host: commissies.ch.tudelft.nl
       http:
         paths:
