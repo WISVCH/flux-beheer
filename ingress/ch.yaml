@@ -200,7 +200,6 @@ spec:
     - host: coh.ewi.tudelft.nl
       http:
         paths:
-          - path: /nostalgia/
             backend:
               serviceName: gcloud
               servicePort: 80
@@ -242,6 +241,7 @@ spec:
   tls:
     - hosts:
         - eerstejaarsweekend.nl
+        - coh.ewi.tudelft.nl
         - lustrum.ch
         - symposium.ch.tudelft.nl
         - www.eerstejaarsweekend.nl
@@ -269,12 +269,6 @@ spec:
           - backend:
               serviceName: rob
               servicePort: 443
-    - host: coh.ewi.tudelft.nl
-      http:
-        paths:
-          - backend:
-              serviceName: gcloud
-              servicePort: 80
     - host: commissies.ch.tudelft.nl
       http:
         paths:
