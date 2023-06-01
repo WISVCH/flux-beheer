@@ -197,7 +197,7 @@ spec:
           - backend:
               serviceName: gcloud
               servicePort: 80
-        - host: coh.ewi.tudelft.nl
+    - host: coh.ewi.tudelft.nl
       http:
         paths:
           - backend:
