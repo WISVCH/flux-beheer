@@ -197,6 +197,12 @@ spec:
           - backend:
               serviceName: gcloud
               servicePort: 80
+        - host: coh.ewi.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: gcloud
+              servicePort: 80
     - host: commissies.tudelft.nl
       http:
         paths:
@@ -262,12 +268,6 @@ spec:
           - backend:
               serviceName: rob
               servicePort: 443
-    - host: coh.ewi.tudelft.nl
-      http:
-        paths:
-            backend:
-              serviceName: gcloud
-              servicePort: 80
     - host: commissies.ch.tudelft.nl
       http:
         paths:
