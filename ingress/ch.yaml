@@ -197,12 +197,6 @@ spec:
           - backend:
               serviceName: gcloud
               servicePort: 80
-    - host: coh.ewi.tudelft.nl
-      http:
-        paths:
-            backend:
-              serviceName: gcloud
-              servicePort: 80
     - host: commissies.tudelft.nl
       http:
         paths:
@@ -241,7 +235,6 @@ spec:
   tls:
     - hosts:
         - eerstejaarsweekend.nl
-        - coh.ewi.tudelft.nl
         - lustrum.ch
         - symposium.ch.tudelft.nl
         - www.eerstejaarsweekend.nl
@@ -269,6 +262,12 @@ spec:
           - backend:
               serviceName: rob
               servicePort: 443
+    - host: coh.ewi.tudelft.nl
+      http:
+        paths:
+            backend:
+              serviceName: gcloud
+              servicePort: 80
     - host: commissies.ch.tudelft.nl
       http:
         paths:
