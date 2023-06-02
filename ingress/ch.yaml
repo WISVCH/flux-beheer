@@ -135,21 +135,6 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/temporal-redirect: https://cod.wisv.ch/
-  name: redirect-cod
-  namespace: w3cie
-spec:
-  rules:
-    - host: cod.ch.tudelft.nl
-  tls:
-    - hosts:
-        - cod.ch.tudelft.nl
-      secretName: ingress-ext-tls
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  annotations:
     nginx.ingress.kubernetes.io/temporal-redirect: https://ch.tudelft.nl
   name: redirect-ch
   namespace: default
@@ -179,13 +164,7 @@ metadata:
   namespace: default
 spec:
   rules:
-    - host: eerstejaarsweekend.nl
-      http:
-        paths:
-          - backend:
-              serviceName: gcloud
-              servicePort: 80
-    - host: lustrum.ch
+  - host: cod.ch.tudelft.nl 
       http:
         paths:
           - backend:
@@ -206,91 +185,15 @@ spec:
     - host: commissies.tudelft.nl
       http:
         paths:
-          - path: /beeld/
-            backend:
-              serviceName: gcloud
-              servicePort: 80
-          - path: /dvhj/
-            backend:
-              serviceName: gcloud
-              servicePort: 80
-          - path: /filmcrew/
-            backend:
-              serviceName: gcloud
-              servicePort: 80
-          - path: /pi/
-            backend:
-              serviceName: gcloud
-              servicePort: 80
-          - path: /sjaarcie/
-            backend:
-              serviceName: gcloud
-              servicePort: 80
-          - path: /verdiepcie/
-            backend:
-              serviceName: gcloud
-              servicePort: 80
-          - path: /wifi/
-            backend:
-              serviceName: gcloud
-              servicePort: 80
-          - path: /wocky
-            backend:
+          - backend:
               serviceName: gcloud
               servicePort: 80
   tls:
     - hosts:
-        - eerstejaarsweekend.nl
-        - lustrum.ch
         - symposium.ch.tudelft.nl
-        - www.eerstejaarsweekend.nl
-        - www.lustrum.ch
-      secretName: ingress-ext-tls
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-    nginx.ingress.kubernetes.io/proxy-body-size: 32M
-    nginx.ingress.kubernetes.io/server-snippet: |
-      location /category/uncategorized/ {
-        return 444;
-      }
-  name: proxy-misc
-  namespace: default
-spec:
-  rules:
-    - host: alumni.ch.tudelft.nl
-      http:
-        paths:
-          - backend:
-              serviceName: rob
-              servicePort: 443
-    - host: commissies.ch.tudelft.nl
-      http:
-        paths:
-          - backend:
-              serviceName: rob
-              servicePort: 443
-  tls:
-    - hosts:
-        - ch.tudelft.nl
-        - alumni.ch.tudelft.nl
-        - businesstour.ch.tudelft.nl
-        - ch.ewi.tudelft.nl
-        - ch.its.tudelft.nl
         - commissies.ch.tudelft.nl
-        - coh.ewi.tudelft.nl
-        - connect.ch.tudelft.nl
-        - dkp.tudelft.nl
-        - files.ch.tudelft.nl
-        - hendrik.ch.tudelft.nl
-        - icpc.tudelft.nl
-        - rob.ch.tudelft.nl
-        - www.ch.tudelft.nl
-        - www.icpc.tudelft.nl
+        - coh.ch.tudelft.nl
+        - cod.ch.tudelft.nl
       secretName: ingress-ext-tls
 ---
 apiVersion: cert-manager.io/v1alpha2
@@ -312,17 +215,13 @@ spec:
     - commissies.ch.tudelft.nl
     - connect.ch.tudelft.nl
     - dkp.tudelft.nl
-    - eerstejaarsweekend.nl
     - files.ch.tudelft.nl
     - hendrik.ch.tudelft.nl
     - icpc.tudelft.nl
-    - lustrum.ch
     - rob.ch.tudelft.nl
     - symposium.ch.tudelft.nl
     - studyvisit.ch.tudelft.nl
-    - www.eerstejaarsweekend.nl
     - www.icpc.tudelft.nl
-    - www.lustrum.ch
     - bestuur.ch
   issuerRef:
     kind: ClusterIssuer
