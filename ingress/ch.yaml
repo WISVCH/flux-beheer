@@ -120,21 +120,6 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/temporal-redirect: https://commissies.ch.tudelft.nl/icpc/
-  name: redirect-icpc
-  namespace: default
-spec:
-  rules:
-    - host: icpc.tudelft.nl
-  tls:
-    - hosts:
-        - icpc.tudelft.nl
-      secretName: ingress-ext-tls
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  annotations:
     nginx.ingress.kubernetes.io/temporal-redirect: https://ch.tudelft.nl
   name: redirect-ch
   namespace: default
@@ -188,12 +173,19 @@ spec:
           - backend:
               serviceName: gcloud
               servicePort: 80
+    - host: icpc.tudelft.nl
+      http:
+        paths:
+          - backend:
+              serviceName: gcloud
+              servicePort: 80
   tls:
     - hosts:
         - symposium.ch.tudelft.nl
         - commissies.ch.tudelft.nl
         - coh.ch.tudelft.nl
         - cod.ch.tudelft.nl
+        - icpc.tudelft.nl
       secretName: ingress-ext-tls
 ---
 apiVersion: cert-manager.io/v1alpha2
