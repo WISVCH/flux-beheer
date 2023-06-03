@@ -150,35 +150,35 @@ metadata:
 spec:
   rules:
   - host: cod.ch.tudelft.nl 
-      http:
-        paths:
-          - backend:
-              serviceName: gcloud
-              servicePort: 80
-    - host: symposium.ch.tudelft.nl # Legacy redirect for the 2010 site
-      http:
-        paths:
-          - backend:
-              serviceName: gcloud
-              servicePort: 80
-    - host: coh.ewi.tudelft.nl
-      http:
-        paths:
-          - backend:
-              serviceName: gcloud
-              servicePort: 80
-    - host: commissies.tudelft.nl
-      http:
-        paths:
-          - backend:
-              serviceName: gcloud
-              servicePort: 80
-    - host: icpc.tudelft.nl
-      http:
-        paths:
-          - backend:
-              serviceName: gcloud
-              servicePort: 80
+    http:
+      paths:
+        - backend:
+            serviceName: gcloud
+            servicePort: 80
+  - host: symposium.ch.tudelft.nl # Legacy redirect for the 2010 site
+    http:
+      paths:
+        - backend:
+            serviceName: gcloud
+            servicePort: 80
+  - host: coh.ewi.tudelft.nl
+    http:
+      paths:
+        - backend:
+            serviceName: gcloud
+            servicePort: 80
+  - host: commissies.tudelft.nl
+    http:
+      paths:
+        - backend:
+            serviceName: gcloud
+            servicePort: 80
+  - host: icpc.tudelft.nl
+    http:
+      paths:
+        - backend:
+            serviceName: gcloud
+            servicePort: 80
   tls:
     - hosts:
         - symposium.ch.tudelft.nl
