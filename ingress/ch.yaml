@@ -87,21 +87,6 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/temporal-redirect: https://ch.tudelft.nl/wiki/chmanual:externetoegangank
-  name: files
-  namespace: default
-spec:
-  rules:
-    - host: files.ch.tudelft.nl
-  tls:
-    - hosts:
-        - files.ch.tudelft.nl
-      secretName: ingress-ext-tls
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  annotations:
     nginx.ingress.kubernetes.io/temporal-redirect: https://ch.tudelft.nl
   name: redirect-ch
   namespace: default
@@ -189,7 +174,6 @@ spec:
     - commissies.ch.tudelft.nl
     - connect.ch.tudelft.nl
     - dkp.tudelft.nl
-    - files.ch.tudelft.nl
     - hendrik.ch.tudelft.nl
     - icpc.tudelft.nl
     - rob.ch.tudelft.nl
