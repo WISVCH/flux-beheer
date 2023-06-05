@@ -134,7 +134,7 @@ spec:
         - backend:
             serviceName: gcloud
             servicePort: 80
-  - host: commissies.tudelft.nl
+  - host: commissies.ch.tudelft.nl
     http:
       paths:
         - backend:
