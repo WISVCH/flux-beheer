@@ -10,7 +10,7 @@ metadata:
     fluxcd.io/automated: "true"
 spec:
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 3
   selector:
     matchLabels:
