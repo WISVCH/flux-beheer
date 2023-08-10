@@ -46,7 +46,7 @@ spec:
         - name: WORDPRESS_DB_PREFIX
           value: chtud59_
         - name: DIENST2_API_URL
-          value: https://dienst2.ch.tudelft.nl/ldb/api/v3/
+          value: https://dienst2-api.wisv.ch/ldb/api/v3/
         - name: DIENST2_API_TOKEN
           valueFrom:
             secretKeyRef:
