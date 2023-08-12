@@ -6,7 +6,7 @@ metadata:
   labels:
     app: studyvisit-2023
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: studyvisit-2023

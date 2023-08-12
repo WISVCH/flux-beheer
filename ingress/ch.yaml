@@ -7,24 +7,6 @@ spec:
   externalName: website.w3cie.svc.cluster.local
   type: ExternalName
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: choice
-  namespace: default
-spec:
-  externalName: choice.w3cie.svc.cluster.local
-  type: ExternalName
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: member-registration
-  namespace: default
-spec:
-  externalName: member-registration.w3cie.svc.cluster.local
-  type: ExternalName
----
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -42,17 +24,9 @@ spec:
     - host: ch.tudelft.nl
       http:
         paths:
-          - path: /password/
-            backend:
-              serviceName: modify-password
-              servicePort: 80
           - path: /certs/
             backend:
               serviceName: www-misc
-              servicePort: 80
-          - path: /register/
-            backend:
-              serviceName: member-registration
               servicePort: 80
           - path: /
             backend:
@@ -95,15 +69,11 @@ spec:
   dnsNames:
     - ch.tudelft.nl
     - www.ch.tudelft.nl
-    - alumni.ch.tudelft.nl
-    - businesstour.ch.tudelft.nl
     - ch.ewi.tudelft.nl
     - ch.its.tudelft.nl
     - connect.ch.tudelft.nl
-    - dkp.tudelft.nl
     - hendrik.ch.tudelft.nl
     - icpc.tudelft.nl
-    - studyvisit.ch.tudelft.nl
     - www.icpc.tudelft.nl
     - bestuur.ch
   issuerRef:
