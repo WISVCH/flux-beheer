@@ -1,11 +1,21 @@
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  name: connnect-gke
-  namespace: default
+  name: connect-gke
 spec:
-  externalName: connect.wisv.ch
-  type: ExternalName
+  ports:
+  - protocol: TCP
+    port: 443
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: connect-gke
+subsets:
+- addresses:
+  - ip: 34.141.157.28
+  ports:
+  - port: 433
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
