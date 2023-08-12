@@ -22,17 +22,17 @@ kind: Ingress
 metadata:
   name: connect
   namespace: default
-  annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-    nginx.ingress.kubernetes.io/upstream-vhost: "connect.wisv.ch"
+  # annotations:
+    # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    # nginx.ingress.kubernetes.io/upstream-vhost: "connect.wisv.ch"
 spec:
   rules:
   - host: connect.ch.tudelft.nl
     http:
       paths:
       - backend:
-          serviceName: connect-gke
-          servicePort: 443
+          serviceName: connect
+          servicePort: 80
   tls:
   - hosts:
     - connect.ch.tudelft.nl
